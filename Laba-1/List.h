@@ -31,9 +31,7 @@ public:
 
 	class Iterator {
 	public:
-		Iterator(List&) {
-
-		}
+		Iterator(List&);
 		T& operator *();
 		Iterator operator++();
 		bool operator==(Iterator&);

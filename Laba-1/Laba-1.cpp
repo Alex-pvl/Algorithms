@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <string>
-#include "List.h"
+#include "List.cpp"
 using namespace std;
 
 int main() {
@@ -55,5 +55,7 @@ int main() {
             break;
         }
     }
+
+    
     return 0;
 }

@@ -18,7 +18,7 @@ public:
 	void add(T);
 	bool add(T, int);
 	bool remove(T);
-	bool remove(int);
+	bool removeAt(int);
 
 	class Node {
 	public:

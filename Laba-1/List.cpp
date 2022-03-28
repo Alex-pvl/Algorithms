@@ -140,3 +140,39 @@ T List<T>::getObject(int n) {
 	}
 }
 
+template <class T>
+bool List<T>::editObject(T, int) {
+	// TODO
+	return false;
+}
+
+template <class T>
+int List<T>::getPosition(T object) {
+	Node* tmp = this->head;
+	Iterator iter(this);
+	iter = this->begin();
+	for (int i = 0; i < size; i++) {
+		if (*(*iter) == object) {
+			return i;
+		}
+		++iter;
+	}
+	return -1;
+}
+
+template <class T>
+void List<T>::add(T object) {
+	Node* newNode = new Node(object);
+	if (this->head == nullptr) {
+		this->head = newNode;
+	}
+	else {
+		Node* tmp = this->head;
+		while (tmp->next != this->head) {
+			tmp = tmp->next;
+		}
+		tmp->next = newNode;
+		newNode->next = this->head;
+	}
+}
+

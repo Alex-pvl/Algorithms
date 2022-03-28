@@ -10,6 +10,7 @@ int main() {
     cout << "Доступные команды:" << menu << endl << "> ";
     cin >> mode;
     while (mode != 0) {
+        cin >> mode;
         switch (mode)
         {
         case 1:

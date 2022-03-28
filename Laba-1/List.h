@@ -36,7 +36,6 @@ public:
 		Iterator operator++();
 		bool operator==(Iterator&);
 		bool operator!=(Iterator&);
-	private:
 		List* l;
 		Node* cur;
 	};

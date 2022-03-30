@@ -14,12 +14,29 @@ int main() {
     //bool isAdded;
     list.add("s");
     list.add("f");
+    
+    list.add("4");
     list.add("1");
-    list.add("4", 2);
-    //list.remove("1");
+    
+    
+    list.add("head", 1);
+    
+    //List<string> list2(list);
     cout << "Size: " << list.getSize() << endl;
     for (int i = 1; i <= list.getSize(); i++) {
-        cout << list.getPosition(list.getObject(i)) << ": " << list.getObject(i) << endl;
+        cout << list.getObject(i) << endl;
+    }
+
+    list.remove("1");
+
+    cout << "Size: " << list.getSize() << endl;
+    for (int i = 1; i <= list.getSize(); i++) {
+        cout << list.getObject(i) << endl;
+    }
+
+    list.editObject("new head", 1);
+    for (int i = 1; i <= list.getSize(); i++) {
+        cout << list.getObject(i) << endl;
     }
     //cout << list.remove("f");
     /*cout << list.add("w", 3) << endl;

@@ -221,6 +221,7 @@ bool List<T>::add(T object, int index) {
 			Node* newNode = new Node(object);
 			tmp->next = newNode;
 			newNode->next = this->head;
+			this->head = newNode;
 		}
 		else {
 			for (int i = 0; i < index - 1; i++) tmp = tmp->next;
@@ -267,6 +268,7 @@ bool List<T>::removeAt(int index) {
 			while (tmp->next->next != this->head) {
 				tmp = tmp->next;
 			}
+			this->head = tmp->next->next;
 			delete tmp->next;
 			tmp->next = this->head;
 		}

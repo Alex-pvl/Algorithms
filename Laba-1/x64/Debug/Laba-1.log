@@ -1,2 +1,10 @@
 ﻿  Laba-1.cpp
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(13,9): warning C4101: value: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(13,20): warning C4101: newValue: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(13,16): warning C4101: id: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(13,30): warning C4101: listSize: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(14,10): warning C4101: isAdded: неиспользованная локальная переменная
+  List.cpp
+  Создание кода...
+  LINK : не найден или не выполнена сборка C:\Users\kiril\source\repos\Alex-pvl\Algorithms\x64\Debug\Laba-1.exe при последней инкрементной компоновке; выполняется полная компоновка
   Laba-1.vcxproj -> C:\Users\kiril\source\repos\Alex-pvl\Algorithms\x64\Debug\Laba-1.exe

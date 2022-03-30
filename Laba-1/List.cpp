@@ -81,7 +81,7 @@ List<T>::Node::Node(T object) {
 
 template <class T>
 List<T>::Node::~Node() {
-	delete this->object; 
+	delete &(this->object); 
 }
 
 // --------------------- Список ------------------------------
@@ -155,10 +155,10 @@ bool List<T>::hasObject(T object) {
 template <class T>
 T List<T>::getObject(int n) {
 	try {
-		if (n > size || n < 1) throw exception("Некорректный индекс");
+		if (n > size+1 || n < 1) throw exception("Некорректный индекс");
 		Node* tmp = this->head;
 		for (int i = 0; i < n - 1; i++) tmp = tmp->next;
-		return *(tmp->object);
+		return (tmp->object);
 	}
 	catch (const exception e) {
 		cerr << e.what();
@@ -175,20 +175,22 @@ template <class T>
 int List<T>::getPosition(T object) {
 	Node* tmp = this->head;
 	int index = 0;
-	while (tmp->next != this->head) {
+	do {
 		if (tmp->object == object) {
 			return index + 1; // надо инкремент?
 		}
 		index++;
 		tmp = tmp->next;
-	}
+	} while (tmp != this->head);
 	return -1;
 }
 
+// FIX последний элемент не добавляется
 template <class T>
 void List<T>::add(T object) {
 	Node* newNode = new Node(object);
 	if (this->head == nullptr) {
+		newNode->next = newNode;
 		this->head = newNode;
 	}
 	else {
@@ -199,23 +201,60 @@ void List<T>::add(T object) {
 		tmp->next = newNode;
 		newNode->next = this->head;
 	}
+	this->size++;
 }
 
+
+// FIX в голову добавляется неправильно
 template <class T>
 bool List<T>::add(T object, int index) {
-	// TODO
+	try {
+		if (index > size + 1 || index < 1) throw exception("Некорректный индекс");
+		Node* newNode = new Node(object);
+		Node* tmp = this->head;
+		for (int i = 1; i < index - 1; i++) tmp = tmp->next;
+		newNode->next = tmp->next;
+		tmp->next = newNode;
+		
+		this->size++;
+		return true;
+	} 
+	catch (const exception e) {
+		cerr << e.what();
+	}
 	return false;
 }
 
-
+// FIX 
 template <class T>
 bool List<T>::remove(T object) {
-	// TODO
+	// инкремент в getPosition() ?
+	int index = this->getPosition(object) - 1;
+	if (index != -1) {
+		Node* nodePrev = this->head, *cur, *nodeNext;
+		for (int i = 0; i < index; i++) nodePrev = nodePrev->next;
+		cur = nodePrev->next;
+		nodeNext = cur->next;
+		nodePrev->next = nodeNext;
+		delete cur;
+		this->size--;
+		return true;
+	}
 	return false;
 }
 
+// FIX
 template <class T>
 bool List<T>::removeAt(int index) {
-	// TODO
+	try {
+		if (index > size || index < 1) throw exception("Некорректный индекс");
+		T delObject = this->getObject(index);
+		this->remove(delObject);
+		this->size--;
+		return true;
+	}
+	catch (const exception e) {
+		cerr << e.what();
+	}
 	return false;
 }

@@ -12,7 +12,7 @@ List<T>::Iterator::Iterator(List& list) {
 }
 
 template <class T>
-T& List<T>::Iterator::operator*() { //Операция доступа по значению теперь возвращает NULL, если итератор равен NULL (возможно стоило бы бросать исключения)
+T& List<T>::Iterator::operator*() {
 	try {
 		if (this->cur != nullptr) {
 			return this->cur->object;
@@ -81,7 +81,7 @@ List<T>::Node::Node(T object) {
 
 template <class T>
 List<T>::Node::~Node() {
-	delete this->object; 
+
 }
 
 // --------------------- Список ------------------------------
@@ -95,24 +95,21 @@ List<T>::List() {
 template <class T>
 List<T>::List(const List<T>& list) {
 	this->size = list->size;
-	
-	//this->size = list->size;
-	//Iterator iter(list);
-	//iter = list.begin();
-	//if (iter != list.end()) {
-	//	this->head = new Node(*iter); //Надо тестить
-	//	Node prev = this->head;
-	//	++iter;
-	//	while (iter != list.begin())
-	//	{
-	//		Node* cur = new Node(*iter);
-	//		prev.next = cur; //???
-	//		prev = cur;
-	//		delete cur;
-	//		++iter;
-	//	}
-	//	prev.next = this->head;
-	//}
+	if (this->size > 0) {
+		Node* tmp = list.head;
+		this->head = new Node(tmp->object);
+		Node* cur = this->head;
+		tmp = tmp->next;
+		while (tmp != list.head) {
+			Node* newNode = new Node(tmp->object);
+			cur->next = newNode;
+			cur = cur->next;
+		}
+		cur->next = this->head;
+	}
+	else {
+		this->head = nullptr;
+	}
 }
 
 template <class T>
@@ -127,12 +124,12 @@ int List<T>::getSize() {
 
 template <class T>
 void List<T>::clear() {
-	//Iterator iter(*this);
-	//for (int i = 0; i < this->size; i++){
-	//	Node* del = iter.cur; //???
-	//	++iter; //Под подозрением -_-
-	//	delete del;
-	//}
+	Node* tmp = this->head;
+	for (int i = 0; i < this->size; i++){
+		Node* del = tmp;
+		tmp = tmp->next;
+		delete del;
+	}
 }
 
 template <class T>
@@ -142,13 +139,12 @@ bool List<T>::isEmpty() {
 
 template <class T>
 bool List<T>::hasObject(T object) {
-	//Iterator iter(*this);
-	//iter = this->begin();
-	//for (int i = 0; i < this->size; i++){
-	//	if ((*iter) == object) { //????
-	//		return true;
-	//	}
-	//}
+	Node* tmp = this->head;
+	for (int i = 0; i < this->size; i++){
+		if (tmp->object == object) {
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -167,19 +163,24 @@ T List<T>::getObject(int n) {
 
 template <class T>
 bool List<T>::editObject(T object, int index) {
-	// TODO
-	return false;
+	if (index > size || index < 1) {
+		return false;
+	}
+	else {
+		Node* tmp = this->head;
+		for (int i = 0; i < index - 1; i++) tmp = tmp->next;
+		tmp->object = object;
+		return true;
+	}
 }
 
 template <class T>
 int List<T>::getPosition(T object) {
 	Node* tmp = this->head;
-	int index = 0;
-	while (tmp->next != this->head) {
+	for (int i = 0; i < this->size; i++) {
 		if (tmp->object == object) {
-			return index + 1; // надо инкремент?
+			return i + 1;
 		}
-		index++;
 		tmp = tmp->next;
 	}
 	return -1;
@@ -199,23 +200,83 @@ void List<T>::add(T object) {
 		tmp->next = newNode;
 		newNode->next = this->head;
 	}
+	this->size++;
 }
 
 template <class T>
 bool List<T>::add(T object, int index) {
-	// TODO
-	return false;
+	if (index > size + 1 || index < 0) {
+		return false;
+	}
+	else if (this->size == 0) {
+		this->head = new Node(object);
+
+	}
+	else {
+		Node* tmp = this->head;
+		if (index == 0) {
+			while (tmp->next != this->head) {
+				tmp = tmp->next;
+			}
+			Node* newNode = new Node(object);
+			tmp->next = newNode;
+			newNode->next = this->head;
+		}
+		else {
+			for (int i = 0; i < index - 1; i++) tmp = tmp->next;
+			Node* next = tmp->next;
+			Node* newNode = new Node(object);
+			tmp->next = newNode;
+			newNode->next = next;
+		}
+	}
+	this->size++;
+	return true;
 }
 
 
 template <class T>
 bool List<T>::remove(T object) {
-	// TODO
-	return false;
+	if (this->head == nullptr) {
+		return false;
+	}
+	else if (this->size == 1) {
+		delete this->head;
+		this->head = nullptr;
+	}
+	else {
+		Node* tmp = this->head;
+		while (tmp->next->next != this->head) {
+			tmp = tmp->next;
+		}
+		delete tmp->next;
+		tmp->next = this->head;
+	}
+	this->size--;
+	return true;
 }
 
 template <class T>
 bool List<T>::removeAt(int index) {
-	// TODO
-	return false;
+	if (index > size || index < 1) {
+		return false;
+	}
+	else {
+		Node* tmp = this->head;
+		if (index == 1) {
+			while (tmp->next->next != this->head) {
+				tmp = tmp->next;
+			}
+			delete tmp->next;
+			tmp->next = this->head;
+		}
+		else {
+			for (int i = 0; i < index - 2; i++) tmp = tmp->next;
+			Node* next = tmp->next->next;
+			delete tmp->next;
+			tmp->next = next;
+		}
+		this->size--;
+		return true;
+	}
 }

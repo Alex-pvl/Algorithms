@@ -39,7 +39,7 @@ int main() {
             break;
         case 6:
             cin >> id >> newValue;
-            list.editObject(newValue, id);
+            cout << list.editObject(newValue, id) << endl;
             break;
         case 7:
             cin >> value;

@@ -145,6 +145,7 @@ bool List<T>::hasObject(T object) {
 		if (tmp->object == object) {
 			return true;
 		}
+		tmp = tmp->next;
 	}
 	return false;
 }
@@ -152,7 +153,7 @@ bool List<T>::hasObject(T object) {
 template <class T>
 T List<T>::getObject(int n) {
 	try {
-		if (n > size+1 || n < 1) throw exception("Некорректный индекс");
+		if (n > size || n < 1) throw exception("Некорректный индекс");
 		Node* tmp = this->head;
 		for (int i = 0; i < n - 1; i++) tmp = tmp->next;
 		return (tmp->object);

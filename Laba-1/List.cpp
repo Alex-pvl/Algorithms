@@ -283,3 +283,16 @@ bool List<T>::removeAt(int index) {
 		return true;
 	}
 }
+
+template <class T>
+void List<T>::print() {
+	if (this->size == 0) {
+		return;
+	}
+	else {
+		Node* tmp = this->head;
+		for (int i = 0; i < this->size; tmp = tmp->next, i++) {
+			cout << tmp->object << " ";
+		}
+	}
+}

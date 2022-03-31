@@ -97,6 +97,10 @@ int main() {
             ++iter2;
             cout << (iter != iter2) << endl;
             break;
+        case 19:
+            list.print();
+            cout << endl;
+            break;
         case 0:
             return -1;
         default:

@@ -20,6 +20,8 @@ public:
 	bool remove(T);
 	bool removeAt(int);
 
+	void print();
+
 	class Node {
 	public:
 		Node();

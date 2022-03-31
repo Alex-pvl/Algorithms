@@ -1,7 +1,5 @@
 ﻿  Laba-1.cpp
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(15,10): warning C4101: isAdded: неиспользованная локальная переменная
-  List.cpp
-  Создание кода...
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(163): warning C4715: List<int>::getObject: значение возвращается не при всех путях выполнения
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(27): warning C4715: List<int>::Iterator::operator*: значение возвращается не при всех путях выполнения
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(43): warning C4715: List<int>::Iterator::operator++: значение возвращается не при всех путях выполнения

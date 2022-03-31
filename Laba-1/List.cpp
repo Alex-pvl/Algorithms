@@ -44,12 +44,12 @@ typename List<T>::Iterator List<T>::Iterator::operator++() {
 
 template <class T>
 bool List<T>::Iterator::operator==(Iterator& iter) {
-	return (* (this->l) == *(iter->l)) && (* (this->cur) == *(iter->cur)); 
+	return ((this->l) == (iter.l)) && ((this->cur->object) == (iter.cur->object)); 
 }
 
 template <class T>
 bool List<T>::Iterator::operator!=(Iterator& iter) {
-	return (*(this->l) != *(iter->l)) || (*(this->cur) != *(iter->cur));
+	return ((this->l) != (iter.l)) || ((this->cur->object) != (iter.cur->object));
 }
 
 template <class T>

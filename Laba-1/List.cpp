@@ -71,9 +71,7 @@ List<T>::Node::Node(T object) {
 }
 
 template <class T>
-List<T>::Node::~Node() {
-	
-}
+List<T>::Node::~Node() {}
 
 // --------------------- Список ------------------------------
 
@@ -145,15 +143,10 @@ bool List<T>::hasObject(T object) {
 
 template <class T>
 T List<T>::getObject(int n) {
-	try {
-		if (n > size || n < 1) throw exception("Некорректный индекс\n");
-		Node* tmp = this->head;
-		for (int i = 0; i < n - 1; i++) tmp = tmp->next;
-		return (tmp->object);
-	}
-	catch (const exception e) {
-		cerr << e.what();
-	}
+	if (n > size || n < 1) throw exception("Некорректный индекс\n");
+	Node* tmp = this->head;
+	for (int i = 0; i < n - 1; i++) tmp = tmp->next;
+	return (tmp->object);
 }
 
 template <class T>

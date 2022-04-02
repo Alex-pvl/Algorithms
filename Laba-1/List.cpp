@@ -13,23 +13,27 @@ List<T>::Iterator::Iterator(List& list) {
 
 template <class T>
 T& List<T>::Iterator::operator*() {
-	if (this->cur != nullptr) {
+	Node* dead = new Node;
+	delete dead;
+	if (this->cur != nullptr && this->cur->next != dead->next) {
 		return this->cur->object;
 	}
 	else {
-		throw exception("Попытка доступа к несуществующему элементу\n"); 
+		throw exception("Исключение\n"); 
 	}
 	
 }
 
 template <class T>
 typename List<T>::Iterator List<T>::Iterator::operator++() {
-	if (this->cur != nullptr) {
+	Node* dead = new Node;
+	delete dead;
+	if (this->cur != nullptr && this->cur->next != dead->next) {
 		this->cur = this->cur->next;
 		return *this;
 	}
 	else {
-		throw exception("Список пуст\n");
+		throw exception("Исключение\n");
 	}
 }
 
@@ -60,7 +64,6 @@ typename List<T>::Iterator List<T>::end() {
 
 template <class T> 
 List<T>::Node::Node() {
-	this->object = nullptr; // new T
 	this->next = nullptr;
 }
 
@@ -143,7 +146,7 @@ bool List<T>::hasObject(T object) {
 
 template <class T>
 T List<T>::getObject(int n) {
-	if (n > size || n < 1) throw exception("Некорректный индекс\n");
+	if (n > size || n < 1) throw exception("Исключение\n");
 	Node* tmp = this->head;
 	for (int i = 0; i < n - 1; i++) tmp = tmp->next;
 	return (tmp->object);

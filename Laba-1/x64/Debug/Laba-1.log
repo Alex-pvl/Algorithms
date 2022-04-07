@@ -1,6 +1,5 @@
-﻿  Laba-1.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(15,10): warning C4101: isAdded: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(163): warning C4715: List<int>::getObject: значение возвращается не при всех путях выполнения
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(27): warning C4715: List<int>::Iterator::operator*: значение возвращается не при всех путях выполнения
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\List.cpp(43): warning C4715: List<int>::Iterator::operator++: значение возвращается не при всех путях выполнения
+﻿  BST.cpp
+  LINK : не найден или не выполнена сборка C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe при последней инкрементной компоновке; выполняется полная компоновка
+List.obj : warning LNK4099: "vc142.pdb" PDB не найден с "List.obj" или на "C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\vc142.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+Laba-1.obj : warning LNK4099: "vc142.pdb" PDB не найден с "Laba-1.obj" или на "C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\vc142.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
   Laba-1.vcxproj -> C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe

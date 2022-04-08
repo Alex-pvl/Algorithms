@@ -1,5 +1,27 @@
-﻿  BST.cpp
-  LINK : не найден или не выполнена сборка C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe при последней инкрементной компоновке; выполняется полная компоновка
-List.obj : warning LNK4099: "vc142.pdb" PDB не найден с "List.obj" или на "C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\vc142.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-Laba-1.obj : warning LNK4099: "vc142.pdb" PDB не найден с "Laba-1.obj" или на "C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\vc142.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-  Laba-1.vcxproj -> C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe
+﻿  Laba-1.cpp
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(98,21): error C2676: бинарный "++": "BST<int,int>::Iterator" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(106,42): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "BST<int,int>::Iterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(27,8): message : может быть "bool BST<int,int>::Iterator::operator ==(BST<int,int>::Iterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(106,42): message : при попытке сопоставить список аргументов "(BST<int,int>::Iterator, BST<int,int>::Iterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(109,40): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "BST<int,int>::Iterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(27,8): message : может быть "bool BST<int,int>::Iterator::operator ==(BST<int,int>::Iterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(109,40): message : при попытке сопоставить список аргументов "(BST<int,int>::Iterator, BST<int,int>::Iterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(112,42): error C2679: бинарный "!=": не найден оператор, принимающий правый операнд типа "BST<int,int>::Iterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(29,8): message : может быть "bool BST<int,int>::Iterator::operator !=(BST<int,int>::Iterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(112,42): message : при попытке сопоставить список аргументов "(BST<int,int>::Iterator, BST<int,int>::Iterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(115,40): error C2679: бинарный "!=": не найден оператор, принимающий правый операнд типа "BST<int,int>::Iterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(29,8): message : может быть "bool BST<int,int>::Iterator::operator !=(BST<int,int>::Iterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(115,40): message : при попытке сопоставить список аргументов "(BST<int,int>::Iterator, BST<int,int>::Iterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(147,22): error C2676: бинарный "++": "BST<int,int>::RevIterator" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(155,44): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "BST<int,int>::RevIterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(43,8): message : может быть "bool BST<int,int>::RevIterator::operator ==(BST<int,int>::RevIterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(155,44): message : при попытке сопоставить список аргументов "(BST<int,int>::RevIterator, BST<int,int>::RevIterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(158,42): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "BST<int,int>::RevIterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(43,8): message : может быть "bool BST<int,int>::RevIterator::operator ==(BST<int,int>::RevIterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(158,42): message : при попытке сопоставить список аргументов "(BST<int,int>::RevIterator, BST<int,int>::RevIterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(161,44): error C2679: бинарный "!=": не найден оператор, принимающий правый операнд типа "BST<int,int>::RevIterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(45,8): message : может быть "bool BST<int,int>::RevIterator::operator !=(BST<int,int>::RevIterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(161,44): message : при попытке сопоставить список аргументов "(BST<int,int>::RevIterator, BST<int,int>::RevIterator)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(164,42): error C2679: бинарный "!=": не найден оператор, принимающий правый операнд типа "BST<int,int>::RevIterator" (или приемлемое преобразование отсутствует)
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(45,8): message : может быть "bool BST<int,int>::RevIterator::operator !=(BST<int,int>::RevIterator &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(164,42): message : при попытке сопоставить список аргументов "(BST<int,int>::RevIterator, BST<int,int>::RevIterator)"

@@ -1,17 +1,17 @@
 ﻿#include <iostream>
 #include <string>
-#include "List.cpp"
+#include "BST.cpp"
 using namespace std;
 
 int main() {
     setlocale(LC_ALL, "ru");
     int mode = -1;
-    List<int> list;
-    List<int>::Iterator iter1(list);
-    List<int>::Iterator iter2(list);
-    string menu = "\n1 - Опрос размера списка\n2 - Очистка списка\n3 - Проверка списка на пустоту\n4 - Опрос наличия заданного значения\n5 - Чтение значения с заданным номером в списке\n6 - Изменение значения с заданным номером в списке\n7 - Получение позиции в списке для заданного значения\n8 - Включение нового значения\n9 - Включение нового значения в позицию с заданным номером\n10 - Удаление заданного значения из списка\n11 - Удаление заданного значения из позиции с заданным номером\n12 - Запрос прямого итератора\n13 - Запрос \"неустановленного\" прямого итератора\n14 - Операция доступа по чтению к текущему значению *\n15 - Операция доступа по записи к текущему значению *\n16 - Операция инкремента для перехода к следующему значению в списке\n17 - Проверка равенства однотипных итераторов ==\n18 - Проверка равенства однотипных итераторов !=\n19 - Вывод элементов списка\n0 - Завершение программы\n";
+    BST<int, int> tree;
+    BST<int, int>::Iterator iter(&tree);
+    BST<int, int>::RevIterator riter(&tree);
+    string menu = "\n1 - Опрос размера дерева\n2 - Очистка дерева\n3 - Проверка дерева на пустоту\n4 - Доступ по чтению к данным по ключу\n5 - Доступ по записи к данным по ключу\n6 - Включение данных с заданным ключом\n7 - Удаление данных с заданным ключом\n8 - Вывод на экран последовательности ключей при обходе узлов дерева по схеме L -> R -> t\n9 - Объединение двух BST-деревьев\n10 - Запрос прямого итератора\n11 - Запрос \"неустановленного\" прямого итератора\n12 - Операция доступа по чтению к текущему значению прямого итератора *\n13 - Операция доступа по записи к текущему значению прямого итератора *\n14 - Операция инкремента для перехода к следующему значению в списке для прямого итератора\n15 - Проверка равенства прямого итератора узлу с минимальным ключом\n16 - Проверка равенства прямого итератора \"неустановленному\" прямому итератору\n17 - Проверка неравенства прямого итератора узлу с минимальным ключом\n18 - Проверка неравенства прямого итератора \"неустановленному\" прямому итератору\n19 - Запрос обратного итератора\n20 - Запрос \"неустановленного\" обратного итератора\n21 - Операция доступа по чтению к текущему значению обратного итератора *\n22 - Операция доступа по записи к текущему значению обратного итератора *\n23 - Операция инкремента для перехода к предыдущему по ключу узлу в дереве для прямого итератора\n24 - Проверка равенства обратного итератора узлу с максимальным ключом\n25 - Проверка равенства обратного итератора \"неустановленному\" обратному итератору\n26 - Проверка неравенства обратного итератора узлу с максимальным ключом\n27 - Проверка неравенства обратного итератора \"неустановленному\" обратному итератору\n28 - Вывод меню\n0 - Завершение программы\n";
     cout << "Доступные команды:" << menu << endl;
-    int value, id, newValue, listSize, iterNum;
+    int value, id, newValue, treeSize, iterNum;
     bool isAdded;
     while (mode != 0) {
         cout << "> ";
@@ -19,119 +19,152 @@ int main() {
         switch (mode)
         {
         case 1:
-            listSize = list.getSize();
-            cout << listSize << endl;
+            treeSize = tree.getSize();
+            cout << treeSize << endl;
             break;
         case 2:
-            list.clear();
+            tree.clear();
             cout << "Список очищен" << endl;
             break;
         case 3:
-            cout << list.isEmpty() << endl;
+            cout << tree.isEmpty() << endl;
             break;
         case 4:
-            cin >> value;
-            cout << list.hasObject(value) << endl;
+            cin >> id;
+            try
+            {
+                cout << tree.get(id) << endl;
+            }
+            catch (const exception e)
+            {
+                cerr << e.what();
+            }
             break;
         case 5:
-            cin >> id;
-            cout << list.getObject(id) << endl;
+            cin >> id >> newValue;
+            try
+            {
+                tree.get(id) = newValue;
+            }
+            catch (const exception e)
+            {
+                cerr << e.what();
+            }
             break;
         case 6:
-            cin >> id >> newValue;
-            cout << list.editObject(newValue, id) << endl;
+            cin >> id >> value;
+            cout << tree.put(id, value) << endl;
             break;
         case 7:
-            cin >> value;
-            id = list.getPosition(value);
-            cout << id << endl;
+            cin >> id;
+            cout << tree.remove(id) << endl;
             break;
         case 8:
-            cin >> value;
-            list.add(value);
+            tree.print();
             break;
         case 9:
-            cin >> id >> value;
-            cout << list.add(value, id) << endl;
+            //TODO
             break;
         case 10:
-            cin >> value;
-            cout << list.remove(value) << endl;
+            iter = tree.begin();
             break;
         case 11:
-            cin >> id;
-            cout << list.removeAt(id) << endl;
+            iter = tree.end();
             break;
         case 12:
-            cin >> iterNum;
-            if (iterNum == 1) {
-                iter1 = list.begin();
+            try
+            {
+                cout << *iter << endl;
             }
-            else if (iterNum == 2) {
-                iter2 = list.begin();
+            catch (const exception e)
+            {
+                cerr << e.what();
             }
             break;
         case 13:
-            cin >> iterNum;
-            if (iterNum == 1) {
-                iter1 = list.end();
+            cin >> newValue;
+            try
+            {
+                *iter = newValue;
             }
-            else if (iterNum == 2) {
-                iter2 = list.end();
+            catch (const exception e)
+            {
+                cerr << e.what();
             }
             break;
         case 14:
-            cin >> iterNum;
-            try {
-                if (iterNum == 1) {
-                    cout << *iter1 << endl;
-                }
-                else if (iterNum == 2) {
-                    cout << *iter2 << endl;
-                }
+            try
+            {
+                iter++;
             }
-            catch (const exception e) {
+            catch (const exception e)
+            {
                 cerr << e.what();
             }
             break;
         case 15:
-            cin >> iterNum;
-            cin >> newValue;
-            try {
-                if (iterNum == 1) {
-                    *iter1 = newValue;
-                }
-                else if (iterNum == 2) {
-                    *iter2 = newValue;
-                }
-            }
-            catch (const exception e) {
-                cerr << e.what();
-            }
+            cout << (iter == tree.begin()) << endl;
             break;
         case 16:
-            cin >> iterNum;
-            try {
-                if (iterNum == 1) {
-                    ++iter1;
-                }
-                else if (iterNum == 2) {
-                    ++iter2;
-                }
+            cout << (iter == tree.end()) << endl;
+            break;
+        case 17:
+            cout << (iter != tree.begin()) << endl;
+            break;
+        case 18:
+            cout << (iter != tree.end()) << endl;
+            break;
+        case 19:
+            riter = tree.rbegin();
+            break;
+        case 20:
+            riter = tree.rend();
+            break;
+        case 21:
+            try
+            {
+                cout << *riter << endl;
             }
-            catch (const exception e) {
+            catch (const exception e)
+            {
                 cerr << e.what();
             }
             break;
-        case 17:
-            cout << (iter1 == iter2) << endl;
+        case 22:
+            cin >> newValue;
+            try
+            {
+                *riter = newValue;
+            }
+            catch (const exception e)
+            {
+                cerr << e.what();
+            }
             break;
-        case 18:
-            cout << (iter1 != iter2) << endl;
+        case 23:
+            try
+            {
+                riter++;
+            }
+            catch (const exception e)
+            {
+                cerr << e.what();
+            }
             break;
-        case 19:
-            list.print();
-            cout << endl;
+        case 24:
+            cout << (riter == tree.rbegin()) << endl;
+            break;
+        case 25:
+            cout << (riter == tree.rend()) << endl;
+            break;
+        case 26:
+            cout << (riter != tree.rbegin()) << endl;
+            break;
+        case 27:
+            cout << (riter != tree.rend()) << endl;
+            break;
+        case 28:
+            cout << "Доступные команды:" << menu << endl;
             break;
         case 0:
             return -1;

@@ -12,15 +12,20 @@ protected:
 		Node* right;
 	};
 
+public:
 	class Iterator {
 		BST* tree;
 		Node* cur;
 	public:
 		Iterator();
-		Iterator(Node*);
+		Iterator(BST*);
+		// операция доступа по чтению и записи к данным текущего узла
 		V& operator*();
+		// операция перехода к следующему по ключу узлу в дереве
 		Iterator operator++();
+		// проверка равенства однотипных итераторов
 		bool operator==(Iterator&);
+		// проверка неравенства однотипных итераторов
 		bool operator!=(Iterator&);
 	};
 
@@ -29,24 +34,28 @@ protected:
 		Node* cur;
 	public:
 		RevIterator();
-		RevIterator(Node*);
+		RevIterator(BST*);
+		// операция доступа по чтению и записи к данным текущего узла
 		V& operator*();
+		// операция перехода к предыдущему по ключу узлу в дереве
 		RevIterator operator++();
+		// проверка равенства однотипных итераторов
 		bool operator==(RevIterator&);
+		// проверка неравенства однотипных итераторов
 		bool operator!=(RevIterator&);
 	};
+
 	friend class Node;
 	friend class Iterator;
 	friend class RevIterator;
-
-public:
+	
 	// конструктор
 	BST();
 	// конструктор копирования
 	BST(const BST&);
 	// деструктор
 	~BST();
-	// опрос размера списка
+	// опрос размера дерева
 	int getSize();
 	// очистка дерева
 	void clear();
@@ -57,10 +66,10 @@ public:
 	// удаление данных с заданным ключом
 	bool remove(K);
 	// доступ по чтению/записи к данным по ключу
-	V* get(K);
+	V& get(K);
 	// формирование списка ключей в дереве в порядке обхода узлов по схеме
 	void print();
-	// дополнительная операция, заданная в варианте задания
+	// объединение двух BST-деревьев
 	BST join(BST&);
 	// запрос прямого итератора, установленного на узел дерева с минимальным ключом
 	Iterator begin();

@@ -18,7 +18,7 @@ public:
 		Node* cur;
 	public:
 		Iterator();
-		Iterator(BST*);
+		Iterator(BST&);
 		// операция доступа по чтению и записи к данным текущего узла
 		V& operator*();
 		// операция перехода к следующему по ключу узлу в дереве
@@ -34,7 +34,7 @@ public:
 		Node* cur;
 	public:
 		RevIterator();
-		RevIterator(BST*);
+		RevIterator(BST&);
 		// операция доступа по чтению и записи к данным текущего узла
 		V& operator*();
 		// операция перехода к предыдущему по ключу узлу в дереве

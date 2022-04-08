@@ -1,4 +1,5 @@
-﻿  Laba-1.cpp
+﻿  BST.cpp
+  Laba-1.cpp
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(98,21): error C2676: бинарный "++": "BST<int,int>::Iterator" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(106,42): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "BST<int,int>::Iterator" (или приемлемое преобразование отсутствует)
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(27,8): message : может быть "bool BST<int,int>::Iterator::operator ==(BST<int,int>::Iterator &)"
@@ -25,3 +26,4 @@ C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(161,44): messa
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(164,42): error C2679: бинарный "!=": не найден оператор, принимающий правый операнд типа "BST<int,int>::RevIterator" (или приемлемое преобразование отсутствует)
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\BST.h(45,8): message : может быть "bool BST<int,int>::RevIterator::operator !=(BST<int,int>::RevIterator &)"
 C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(164,42): message : при попытке сопоставить список аргументов "(BST<int,int>::RevIterator, BST<int,int>::RevIterator)"
+  Создание кода...

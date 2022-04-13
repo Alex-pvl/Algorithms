@@ -27,11 +27,13 @@ public:
 		bool operator==(Iterator&);
 		// проверка неравенства однотипных итераторов
 		bool operator!=(Iterator&);
+		friend class BST;
 	};
 
 	class RevIterator {
 		BST* tree;
 		Node* cur;
+		friend class BST;
 	public:
 		RevIterator();
 		RevIterator(BST&);
@@ -44,10 +46,7 @@ public:
 		// проверка неравенства однотипных итераторов
 		bool operator!=(RevIterator&);
 	};
-
 	friend class Node;
-	friend class Iterator;
-	friend class RevIterator;
 	
 	// конструктор
 	BST();
@@ -80,8 +79,10 @@ public:
 	// запрос «неустановленного» обратного итератора
 	RevIterator rend();
 
+	// -------------- Доп мктоды --------------
+	void printNode(Node*);
+
 private:
 	Node* root;
 	int size;
 };
-

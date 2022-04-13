@@ -12,6 +12,19 @@ List<T>::Iterator::Iterator(List& list) {
 }
 
 template <class T>
+<<<<<<< HEAD
+T& List<T>::Iterator::operator*() { //Операция доступа по значению теперь возвращает NULL, если итератор равен NULL (возможно стоило бы бросать исключения)
+	try {
+		if (this->cur != nullptr) {
+			return this->cur->object;
+		}
+		else {
+			throw exception("Отказ доступа"); // что?
+		}
+	}
+	catch (const exception e) {
+		cerr << e.what();
+=======
 T& List<T>::Iterator::operator*() {
 	Node* dead = new Node;
 	delete dead;
@@ -20,12 +33,25 @@ T& List<T>::Iterator::operator*() {
 	}
 	else {
 		throw exception("Исключение\n"); 
+>>>>>>> master
 	}
-	
 }
 
 template <class T>
 typename List<T>::Iterator List<T>::Iterator::operator++() {
+<<<<<<< HEAD
+	try {
+		if (this->cur != nullptr) {
+			this->cur = this->cur->next;
+			return *this;
+		}
+		else {
+			throw exception("Список пуст"); //Добавлено исключение при значении объекта итератора равном NULL (но нужно ли оно?)
+		}
+	}
+	catch (const exception e) {
+		cerr << e.what();
+=======
 	Node* dead = new Node;
 	delete dead;
 	if (this->cur != nullptr && this->cur->next != dead->next) {
@@ -34,17 +60,18 @@ typename List<T>::Iterator List<T>::Iterator::operator++() {
 	}
 	else {
 		throw exception("Исключение\n");
+>>>>>>> master
 	}
 }
 
 template <class T>
 bool List<T>::Iterator::operator==(Iterator& iter) {
-	return ((this->l) == (iter.l)) && ((this->cur) == (iter.cur)); 
+	return ((this->l) == (iter.l)) && ((this->cur->object) == (iter.cur->object)); 
 }
 
 template <class T>
 bool List<T>::Iterator::operator!=(Iterator& iter) {
-	return ((this->l) != (iter.l)) || ((this->cur) != (iter.cur));
+	return ((this->l) != (iter.l)) || ((this->cur->object) != (iter.cur->object));
 }
 
 template <class T>
@@ -120,11 +147,9 @@ void List<T>::clear() {
 	for (int i = 0; i < this->size; i++) {
 		Node* del = tmp;
 		tmp = tmp->next;
-		
 		delete del;
 	}
 	this->size=0;
-	this->head = nullptr;
 }
 
 template <class T>
@@ -139,17 +164,28 @@ bool List<T>::hasObject(T object) {
 		if (tmp->object == object) {
 			return true;
 		}
-		tmp = tmp->next;
 	}
 	return false;
 }
 
 template <class T>
 T List<T>::getObject(int n) {
+<<<<<<< HEAD
+	try {
+		if (n > size || n < 1) throw exception("Некорректный индекс");
+		Node* tmp = this->head;
+		for (int i = 0; i < n - 1; i++) tmp = tmp->next;
+		return (tmp->object);
+	}
+	catch (const exception e) {
+		cerr << e.what();
+	}
+=======
 	if (n > size || n < 1) throw exception("Исключение\n");
 	Node* tmp = this->head;
 	for (int i = 0; i < n - 1; i++) tmp = tmp->next;
 	return (tmp->object);
+>>>>>>> master
 }
 
 template <class T>

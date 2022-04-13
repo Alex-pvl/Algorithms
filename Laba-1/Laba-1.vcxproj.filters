@@ -18,12 +18,12 @@
     <ClCompile Include="Laba-1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
+    <ClCompile Include="BST.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="List.h">
+    <ClInclude Include="BST.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

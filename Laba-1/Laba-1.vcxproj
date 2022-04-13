@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BST.cpp" />
     <ClCompile Include="Laba-1.cpp" />
-    <ClCompile Include="List.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="List.h" />
+    <ClInclude Include="BST.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

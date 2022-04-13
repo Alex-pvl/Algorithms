@@ -12,6 +12,7 @@ List<T>::Iterator::Iterator(List& list) {
 }
 
 template <class T>
+<<<<<<< HEAD
 T& List<T>::Iterator::operator*() { //Операция доступа по значению теперь возвращает NULL, если итератор равен NULL (возможно стоило бы бросать исключения)
 	try {
 		if (this->cur != nullptr) {
@@ -23,11 +24,22 @@ T& List<T>::Iterator::operator*() { //Операция доступа по значению теперь возвра
 	}
 	catch (const exception e) {
 		cerr << e.what();
+=======
+T& List<T>::Iterator::operator*() {
+	Node* dead = new Node;
+	delete dead;
+	if (this->cur != nullptr && this->cur->next != dead->next) {
+		return this->cur->object;
+	}
+	else {
+		throw exception("Исключение\n"); 
+>>>>>>> master
 	}
 }
 
 template <class T>
 typename List<T>::Iterator List<T>::Iterator::operator++() {
+<<<<<<< HEAD
 	try {
 		if (this->cur != nullptr) {
 			this->cur = this->cur->next;
@@ -39,6 +51,16 @@ typename List<T>::Iterator List<T>::Iterator::operator++() {
 	}
 	catch (const exception e) {
 		cerr << e.what();
+=======
+	Node* dead = new Node;
+	delete dead;
+	if (this->cur != nullptr && this->cur->next != dead->next) {
+		this->cur = this->cur->next;
+		return *this;
+	}
+	else {
+		throw exception("Исключение\n");
+>>>>>>> master
 	}
 }
 
@@ -69,7 +91,6 @@ typename List<T>::Iterator List<T>::end() {
 
 template <class T> 
 List<T>::Node::Node() {
-	this->object = nullptr; // new T
 	this->next = nullptr;
 }
 
@@ -80,9 +101,7 @@ List<T>::Node::Node(T object) {
 }
 
 template <class T>
-List<T>::Node::~Node() {
-	
-}
+List<T>::Node::~Node() {}
 
 // --------------------- Список ------------------------------
 
@@ -151,6 +170,7 @@ bool List<T>::hasObject(T object) {
 
 template <class T>
 T List<T>::getObject(int n) {
+<<<<<<< HEAD
 	try {
 		if (n > size || n < 1) throw exception("Некорректный индекс");
 		Node* tmp = this->head;
@@ -160,6 +180,12 @@ T List<T>::getObject(int n) {
 	catch (const exception e) {
 		cerr << e.what();
 	}
+=======
+	if (n > size || n < 1) throw exception("Исключение\n");
+	Node* tmp = this->head;
+	for (int i = 0; i < n - 1; i++) tmp = tmp->next;
+	return (tmp->object);
+>>>>>>> master
 }
 
 template <class T>

@@ -90,6 +90,8 @@ public:
 	Node* L(Node*);
 	Node* R(Node*);
 	Node* joinNodes(Node*, Node*);
+	int countNodes();
+	void clearCount();
 
 	// -------------- для теста, потом удалю --
 	void printVertical(Node*, int);
@@ -97,4 +99,5 @@ public:
 private:
 	Node* root;
 	int size;
+	int count;
 };

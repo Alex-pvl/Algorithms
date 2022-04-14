@@ -16,6 +16,7 @@ template<class K, class V>
 BST<K, V>::BST() {
 	this->root = nullptr;
 	this->size = 0;
+	this->count = 0;
 }
 
 template<class K, class V>
@@ -37,6 +38,7 @@ void BST<K, V>::copyNode(Node* cur) {
 template<class K, class V>
 BST<K, V>::~BST() {
 	this->clear();
+	this->count = 0;
 }
 
 template<class K, class V>
@@ -75,6 +77,7 @@ bool BST<K, V>::put(K key, V value) {
 	Node* pred = nullptr;
 	while (node != nullptr) {
 		pred = node;
+		this->count++;
 		if (key == node->key) {
 			return false;
 		}
@@ -100,6 +103,7 @@ template<class K, class V>
 bool BST<K, V>::remove(K key) {
 	Node* node = this->root, * pred = nullptr, * x = nullptr, * y = nullptr;
 	while (node != nullptr && node->key != key) {
+		this->count++;
 		pred = node;
 		if (key < node->key) {
 			node = node->left;
@@ -148,6 +152,7 @@ template<class K, class V>
 V& BST<K, V>::get(K key) {
 	Node* node = this->root;
 	while (node != nullptr && node->key != key) {
+		this->count++;
 		if (key < node->key) {
 			node = node->left;
 		}
@@ -272,6 +277,17 @@ typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
 	return b;
 }
 
+template<class K, class V>
+int BST<K, V>::countNodes() {
+	int k = this->count;
+	this->count = 0;
+	return k;
+}
+
+template<class K, class V>
+void BST<K, V>::clearCount() {
+	this->count = 0;
+}
 
 // --------------------- Итератор ------------------------------
 template <class K, class V>

@@ -190,7 +190,10 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 
 template<class K, class V>
 BST<K, V> BST<K, V>::join(BST& tree) {
-	// TODO
+
+	if (tree->isEmpty()) return this;
+	if (this->isEmpty()) return tree;
+
 	return nullptr;
 }
 
@@ -225,7 +228,7 @@ V& BST<K, V>::Iterator::operator*() {
 template <class K, class V>
 typename BST<K, V>::Iterator BST<K, V>::Iterator::operator++() {
 	if (this->cur != nullptr) {
-		while(this->cur->)
+		this->cur = nextNode(this->tree->root);
 		return *this;
 	}
 	else {
@@ -258,11 +261,28 @@ typename BST<K, V>::Iterator BST<K, V>::end() {
 	return end;
 }
 
+template <class K, class V>
+typename BST<K, V>::Node* BST<K, V>::Iterator::nextNode(Node* cur) {
+	if (cur == nullptr) return nullptr;
+	Node* node = nextNode(cur->left);
+	if (node != nullptr) {
+		return node;
+	}
+	if (cur->key > this->cur->key) {
+		return cur;
+	}
+	node = nextNode(cur->right);
+	if (node != nullptr) {
+		return node;
+	}
+	return nullptr;
+}
+
 // --------------------- Обратный Итератор ------------------------------
 template <class K, class V>
 BST<K, V>::RevIterator::RevIterator() {
 	this->tree = nullptr;
-	this->cur = nullptr;\
+	this->cur = nullptr;
 }
 
 template <class K, class V>
@@ -278,7 +298,6 @@ BST<K, V>::RevIterator::RevIterator(BST& tree) {
 
 template <class K, class V>
 V& BST<K, V>::RevIterator::operator*() {
-	// TODO
 	if (this->cur != nullptr) {
 		return this->cur->value;
 	}
@@ -289,10 +308,8 @@ V& BST<K, V>::RevIterator::operator*() {
 
 template <class K, class V>
 typename BST<K, V>::RevIterator BST<K, V>::RevIterator::operator++() {
-	//TODO
-
 	if (this->cur != nullptr) {
-		
+		this->cur = nextNode(this->tree->root);
 		return *this;
 	}
 	else {
@@ -321,4 +338,21 @@ typename BST<K, V>::RevIterator BST<K, V>::rend() {
 	RevIterator end(*this);
 	end.cur = nullptr;
 	return end;
+}
+
+template <class K, class V>
+typename BST<K, V>::Node* BST<K, V>::RevIterator::nextNode(Node* cur) {
+	if (cur == nullptr) return nullptr;
+	Node* node = nextNode(cur->right);
+	if (node != nullptr) {
+		return node;
+	}
+	if (cur->key < this->cur->key) {
+		return cur;
+	}
+	node = nextNode(cur->left);
+	if (node != nullptr) {
+		return node;
+	}
+	return nullptr;
 }

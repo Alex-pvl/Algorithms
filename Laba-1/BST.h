@@ -16,6 +16,7 @@ public:
 	class Iterator {
 		BST* tree;
 		Node* cur;
+		friend class BST;
 	public:
 		Iterator();
 		Iterator(BST&);
@@ -27,7 +28,8 @@ public:
 		bool operator==(Iterator&);
 		// проверка неравенства однотипных итераторов
 		bool operator!=(Iterator&);
-		friend class BST;
+		Node* nextNode(Node*);
+		
 	};
 
 	class RevIterator {
@@ -45,6 +47,7 @@ public:
 		bool operator==(RevIterator&);
 		// проверка неравенства однотипных итераторов
 		bool operator!=(RevIterator&);
+		Node* nextNode(Node*);
 	};
 	friend class Node;
 	
@@ -79,7 +82,7 @@ public:
 	// запрос «неустановленного» обратного итератора
 	RevIterator rend();
 
-	// -------------- Доп мктоды --------------
+	// -------------- Доп методы --------------
 	void printNode(Node*);
 	void deleteNode(Node*);
 	void copyNode(Node*);

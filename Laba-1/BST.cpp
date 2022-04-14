@@ -22,7 +22,16 @@ template<class K, class V>
 BST<K, V>::BST(const BST& tree) {
 	this->root = tree->root;
 	this->size = tree->size;
-	// TODO: перенести
+	copyNode(this->root);
+}
+
+template<class K, class V>
+void BST<K, V>::copyNode(Node* cur) {
+	if (cur != nullptr) {
+		this->put(cur->key, cur->value);
+	}
+	copyNode(cur->left);
+	copyNode(cur->right);
 }
 
 template<class K, class V>
@@ -37,7 +46,17 @@ int BST<K, V>::getSize() {
 
 template<class K, class V>
 void BST<K, V>::clear() {
-	// TODO
+	this->deleteNode(this->root);
+	this->root = nullptr;
+	this->size = 0;
+}
+
+template<class K, class V>
+void BST<K, V>::deleteNode(Node* node) {
+	if (node == nullptr) return;
+	deleteNode(node->left);
+	deleteNode(node->right);
+	delete node;
 }
 
 template<class K, class V>
@@ -49,6 +68,7 @@ template<class K, class V>
 bool BST<K, V>::put(K key, V value) {
 	if (this->root == nullptr) {
 		this->root = new Node(key, value);
+		this->size++;
 		return true;
 	}
 	Node* node = this->root;
@@ -67,9 +87,11 @@ bool BST<K, V>::put(K key, V value) {
 	}
 	if (key < pred->key) {
 		pred->left = new Node(key, value);
+		this->size++;
 	}
 	else {
 		pred->right = new Node(key, value);
+		this->size++;
 	}
 	return true;
 }
@@ -89,7 +111,6 @@ bool BST<K, V>::remove(K key) {
 	if (node == nullptr) {
 		return false;
 	}
-	pred = nullptr;
 	if (node->left == nullptr && node->right == nullptr) {
 		x = nullptr;
 	}
@@ -100,16 +121,12 @@ bool BST<K, V>::remove(K key) {
 		x = node->left;
 	}
 	else {
-		pred = node;
 		y = node->right;
 		while (y->left != nullptr) {
-			pred = y;
 			y = y->left;
 		}
-		node->key = y->key;
-		node->value = y->value;
-		x = y->right;
-		node = y;
+		y->left = node->left;
+		x = node->right;
 	}
 	if (pred == nullptr) {
 		this->root = x;
@@ -119,10 +136,11 @@ bool BST<K, V>::remove(K key) {
 			pred->left = x;
 		}
 		else {
-			node->right = x;
+			pred->right = x;
 		}
 	}
 	delete node;
+	this->size--;
 	return true;
 }
 
@@ -187,14 +205,15 @@ template <class K, class V>
 BST<K, V>::Iterator::Iterator(BST& tree) {
 	this->tree = &tree;
 	this->cur = tree.root;
-	/*while (cur->left != nullptr) {
-		cur = cur->left;
-	}*/
+	if (this->cur != nullptr) {
+		while (cur->left != nullptr) {
+			cur = cur->left;
+		}
+	}
 }
 
 template <class K, class V>
 V& BST<K, V>::Iterator::operator*() {
-	// TODO
 	if (this->cur != nullptr) {
 		return this->cur->value;
 	}
@@ -205,9 +224,8 @@ V& BST<K, V>::Iterator::operator*() {
 
 template <class K, class V>
 typename BST<K, V>::Iterator BST<K, V>::Iterator::operator++() {
-	// TODO
 	if (this->cur != nullptr) {
-		
+		while(this->cur->)
 		return *this;
 	}
 	else {
@@ -244,19 +262,18 @@ typename BST<K, V>::Iterator BST<K, V>::end() {
 template <class K, class V>
 BST<K, V>::RevIterator::RevIterator() {
 	this->tree = nullptr;
-	this->cur = nullptr;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
+	this->cur = nullptr;\
 }
 
 template <class K, class V>
 BST<K, V>::RevIterator::RevIterator(BST& tree) {
 	this->tree = &tree;
 	this->cur = tree.root;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
+	if (this->cur != nullptr) {
+		while (cur->right != nullptr) {
+			cur = cur->right;
+		}
+	}
 }
 
 template <class K, class V>

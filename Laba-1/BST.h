@@ -81,6 +81,8 @@ public:
 
 	// -------------- Доп мктоды --------------
 	void printNode(Node*);
+	void deleteNode(Node*);
+	void copyNode(Node*);
 
 	// -------------- для теста, потом удалю --
 	void printVertical(Node*, int);

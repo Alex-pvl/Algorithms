@@ -76,7 +76,7 @@ bool BST<K, V>::put(K key, V value) {
 
 template<class K, class V>
 bool BST<K, V>::remove(K key) {
-	Node* node = this->root, * pred, * x, * y;
+	Node* node = this->root, * pred = nullptr, * x = nullptr, * y = nullptr;
 	while (node != nullptr && node->key != key) {
 		pred = node;
 		if (key < node->key) {
@@ -145,18 +145,29 @@ V& BST<K, V>::get(K key) {
 
 template<class K, class V>
 void BST<K, V>::print() {
+	cout << "R -> t -> L(горизонт):" << endl;
+	this->printVertical(this->root, 0);
+	cout << "L -> R -> t:" << endl;
 	this->printNode(this->root);
 }
 
 template<class K, class V>
 void BST<K, V>::printNode(Node* cur) {
-	if (cur->left != nullptr) {
-		this->printNode(cur->left);
-	}
-	if (cur->right != nullptr) {
-		this->printNode(cur->right);
-	}
+	if (cur == nullptr) return;
+	this->printNode(cur->left);
+	this->printNode(cur->right);
 	cout << cur->key << " ";
+}
+
+template<class K, class V>
+void BST<K, V>::printVertical(Node* cur, int level) {
+	if (cur == nullptr) return;
+	this->printVertical(cur->right, level+1);
+	for (int i = 0; i < level; i++) {
+		cout << "\t";
+	}
+	cout << cur->key << "[" << cur->value << "]\n";
+	this->printVertical(cur->left, level+1);
 }
 
 template<class K, class V>
@@ -170,9 +181,6 @@ template <class K, class V>
 BST<K, V>::Iterator::Iterator() {
 	this->tree = nullptr;
 	this->cur = nullptr;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
 }
 
 template <class K, class V>

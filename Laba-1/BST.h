@@ -82,6 +82,9 @@ public:
 	// -------------- Доп мктоды --------------
 	void printNode(Node*);
 
+	// -------------- для теста, потом удалю --
+	void printVertical(Node*, int);
+
 private:
 	Node* root;
 	int size;

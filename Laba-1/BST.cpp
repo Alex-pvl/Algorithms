@@ -22,7 +22,16 @@ template<class K, class V>
 BST<K, V>::BST(const BST& tree) {
 	this->root = tree->root;
 	this->size = tree->size;
-	// TODO: перенести
+	copyNode(this->root);
+}
+
+template<class K, class V>
+void BST<K, V>::copyNode(Node* cur) {
+	if (cur != nullptr) {
+		this->put(cur->key, cur->value);
+	}
+	copyNode(cur->left);
+	copyNode(cur->right);
 }
 
 template<class K, class V>
@@ -37,7 +46,17 @@ int BST<K, V>::getSize() {
 
 template<class K, class V>
 void BST<K, V>::clear() {
-	// TODO
+	this->deleteNode(this->root);
+	this->root = nullptr;
+	this->size = 0;
+}
+
+template<class K, class V>
+void BST<K, V>::deleteNode(Node* node) {
+	if (node == nullptr) return;
+	deleteNode(node->left);
+	deleteNode(node->right);
+	delete node;
 }
 
 template<class K, class V>
@@ -49,6 +68,7 @@ template<class K, class V>
 bool BST<K, V>::put(K key, V value) {
 	if (this->root == nullptr) {
 		this->root = new Node(key, value);
+		this->size++;
 		return true;
 	}
 	Node* node = this->root;
@@ -67,16 +87,18 @@ bool BST<K, V>::put(K key, V value) {
 	}
 	if (key < pred->key) {
 		pred->left = new Node(key, value);
+		this->size++;
 	}
 	else {
 		pred->right = new Node(key, value);
+		this->size++;
 	}
 	return true;
 }
 
 template<class K, class V>
 bool BST<K, V>::remove(K key) {
-	Node* node = this->root, * pred, * x, * y;
+	Node* node = this->root, * pred = nullptr, * x = nullptr, * y = nullptr;
 	while (node != nullptr && node->key != key) {
 		pred = node;
 		if (key < node->key) {
@@ -89,7 +111,6 @@ bool BST<K, V>::remove(K key) {
 	if (node == nullptr) {
 		return false;
 	}
-	pred = nullptr;
 	if (node->left == nullptr && node->right == nullptr) {
 		x = nullptr;
 	}
@@ -100,16 +121,12 @@ bool BST<K, V>::remove(K key) {
 		x = node->left;
 	}
 	else {
-		pred = node;
 		y = node->right;
 		while (y->left != nullptr) {
-			pred = y;
 			y = y->left;
 		}
-		node->key = y->key;
-		node->value = y->value;
-		x = y->right;
-		node = y;
+		y->left = node->left;
+		x = node->right;
 	}
 	if (pred == nullptr) {
 		this->root = x;
@@ -119,10 +136,11 @@ bool BST<K, V>::remove(K key) {
 			pred->left = x;
 		}
 		else {
-			node->right = x;
+			pred->right = x;
 		}
 	}
 	delete node;
+	this->size--;
 	return true;
 }
 
@@ -145,23 +163,37 @@ V& BST<K, V>::get(K key) {
 
 template<class K, class V>
 void BST<K, V>::print() {
+	cout << "R -> t -> L(горизонт):" << endl;
+	this->printVertical(this->root, 0);
+	cout << "L -> R -> t:" << endl;
 	this->printNode(this->root);
 }
 
 template<class K, class V>
 void BST<K, V>::printNode(Node* cur) {
-	if (cur->left != nullptr) {
-		this->printNode(cur->left);
-	}
-	if (cur->right != nullptr) {
-		this->printNode(cur->right);
-	}
+	if (cur == nullptr) return;
+	this->printNode(cur->left);
+	this->printNode(cur->right);
 	cout << cur->key << " ";
 }
 
 template<class K, class V>
+void BST<K, V>::printVertical(Node* cur, int level) {
+	if (cur == nullptr) return;
+	this->printVertical(cur->right, level+1);
+	for (int i = 0; i < level; i++) {
+		cout << "\t";
+	}
+	cout << cur->key << "[" << cur->value << "]\n";
+	this->printVertical(cur->left, level+1);
+}
+
+template<class K, class V>
 BST<K, V> BST<K, V>::join(BST& tree) {
-	// TODO
+
+	if (tree->isEmpty()) return this;
+	if (this->isEmpty()) return tree;
+
 	return nullptr;
 }
 
@@ -170,23 +202,21 @@ template <class K, class V>
 BST<K, V>::Iterator::Iterator() {
 	this->tree = nullptr;
 	this->cur = nullptr;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
 }
 
 template <class K, class V>
 BST<K, V>::Iterator::Iterator(BST& tree) {
 	this->tree = &tree;
 	this->cur = tree.root;
-	/*while (cur->left != nullptr) {
-		cur = cur->left;
-	}*/
+	if (this->cur != nullptr) {
+		while (cur->left != nullptr) {
+			cur = cur->left;
+		}
+	}
 }
 
 template <class K, class V>
 V& BST<K, V>::Iterator::operator*() {
-	// TODO
 	if (this->cur != nullptr) {
 		return this->cur->value;
 	}
@@ -197,9 +227,8 @@ V& BST<K, V>::Iterator::operator*() {
 
 template <class K, class V>
 typename BST<K, V>::Iterator BST<K, V>::Iterator::operator++() {
-	// TODO
 	if (this->cur != nullptr) {
-		
+		this->cur = nextNode(this->tree->root);
 		return *this;
 	}
 	else {
@@ -232,28 +261,43 @@ typename BST<K, V>::Iterator BST<K, V>::end() {
 	return end;
 }
 
+template <class K, class V>
+typename BST<K, V>::Node* BST<K, V>::Iterator::nextNode(Node* cur) {
+	if (cur == nullptr) return nullptr;
+	Node* node = nextNode(cur->left);
+	if (node != nullptr) {
+		return node;
+	}
+	if (cur->key > this->cur->key) {
+		return cur;
+	}
+	node = nextNode(cur->right);
+	if (node != nullptr) {
+		return node;
+	}
+	return nullptr;
+}
+
 // --------------------- Обратный Итератор ------------------------------
 template <class K, class V>
 BST<K, V>::RevIterator::RevIterator() {
 	this->tree = nullptr;
 	this->cur = nullptr;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
 }
 
 template <class K, class V>
 BST<K, V>::RevIterator::RevIterator(BST& tree) {
 	this->tree = &tree;
 	this->cur = tree.root;
-	/*while (cur->right != nullptr) {
-		cur = cur->right;
-	}*/
+	if (this->cur != nullptr) {
+		while (cur->right != nullptr) {
+			cur = cur->right;
+		}
+	}
 }
 
 template <class K, class V>
 V& BST<K, V>::RevIterator::operator*() {
-	// TODO
 	if (this->cur != nullptr) {
 		return this->cur->value;
 	}
@@ -264,10 +308,8 @@ V& BST<K, V>::RevIterator::operator*() {
 
 template <class K, class V>
 typename BST<K, V>::RevIterator BST<K, V>::RevIterator::operator++() {
-	//TODO
-
 	if (this->cur != nullptr) {
-		
+		this->cur = nextNode(this->tree->root);
 		return *this;
 	}
 	else {
@@ -296,4 +338,21 @@ typename BST<K, V>::RevIterator BST<K, V>::rend() {
 	RevIterator end(*this);
 	end.cur = nullptr;
 	return end;
+}
+
+template <class K, class V>
+typename BST<K, V>::Node* BST<K, V>::RevIterator::nextNode(Node* cur) {
+	if (cur == nullptr) return nullptr;
+	Node* node = nextNode(cur->right);
+	if (node != nullptr) {
+		return node;
+	}
+	if (cur->key < this->cur->key) {
+		return cur;
+	}
+	node = nextNode(cur->left);
+	if (node != nullptr) {
+		return node;
+	}
+	return nullptr;
 }

@@ -189,13 +189,89 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 }
 
 template<class K, class V>
-BST<K, V> BST<K, V>::join(BST& tree) {
-
-	if (tree->isEmpty()) return this;
-	if (this->isEmpty()) return tree;
-
-	return nullptr;
+BST<K, V>& BST<K, V>::join(BST& tree) {
+	this->root = joinNodes(this->root, tree.root);
+	return *this;
 }
+
+template<class K, class V>
+typename BST<K, V>::Node* BST<K, V>::insertRoot(Node* node, K key, V value, bool &ins) {
+	bool inserted;
+	if (node == nullptr) {
+		inserted = true;
+		return new Node(key, value);
+	}
+	if (key == node->key) {
+		inserted = false;
+		return node;
+	}
+	if (key < node->key) {
+		node->left = insertRoot(node->left, key, value, inserted);
+		inserted = ins;
+		if (ins) {
+			return R(node);
+		}
+		else {
+			return node;
+		}
+	}
+	else {
+		node->right = insertRoot(node->right, key, value, inserted);
+		inserted = ins;
+		if (ins) {
+			return L(node);
+		}
+		else {
+			return node;
+		}
+	}
+}
+
+template<class K, class V>
+typename BST<K, V>::Node* BST<K, V>::L(Node* node) {
+	if (node == nullptr) {
+		return nullptr;
+	}
+	else {
+		Node* x = node->right;
+		node->right = x->left;
+		x->left = node;
+		return x;
+	}
+}
+
+template<class K, class V>
+typename BST<K, V>::Node* BST<K, V>::R(Node* node) {
+	if (node == nullptr) {
+		return nullptr;
+	}
+	else {
+		Node* x = node->left;
+		node->left = x->right;
+		x->right = node;
+		return x;
+	}
+}
+
+template<class K, class V>
+typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
+	if (a == nullptr) return b;
+	if (b == nullptr) return a;
+	Node* left = a->left;
+	Node* right = a->right;
+	a->left = nullptr;
+	a->right = nullptr;
+	if (a->key == b->key) {
+		delete a;
+		return b;
+	}
+	bool inserted;
+	b = insertRoot(b, a->key, a->value, inserted);
+	b->left = joinNodes(left, b->left);
+	b->right = joinNodes(right, b->right);
+	return b;
+}
+
 
 // --------------------- Итератор ------------------------------
 template <class K, class V>

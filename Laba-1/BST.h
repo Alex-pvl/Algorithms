@@ -72,7 +72,7 @@ public:
 	// формирование списка ключей в дереве в порядке обхода узлов по схеме
 	void print();
 	// объединение двух BST-деревьев
-	BST join(BST&);
+	BST& join(BST&);
 	// запрос прямого итератора, установленного на узел дерева с минимальным ключом
 	Iterator begin();
 	// запрос «неустановленного» прямого итератора
@@ -86,6 +86,10 @@ public:
 	void printNode(Node*);
 	void deleteNode(Node*);
 	void copyNode(Node*);
+	Node* insertRoot(Node*, K, V, bool&);
+	Node* L(Node*);
+	Node* R(Node*);
+	Node* joinNodes(Node*, Node*);
 
 	// -------------- для теста, потом удалю --
 	void printVertical(Node*, int);

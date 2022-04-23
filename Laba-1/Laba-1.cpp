@@ -351,9 +351,10 @@ int main() {
                 cin >> mode2;
                 switch (mode2) {
                 case 1:
+                    tree2.clear();
                     while(true) {
                         cin >> key2;
-                        if (key2 == -1337) break;
+                        if (key2 == -1) break;
                         cin >> value2;
                         tree2.put(key2, value2);
                     }
@@ -369,14 +370,10 @@ int main() {
             cout << "\nГлавное меню: " << endl;
             break;
         case 29:
-            for (int i = 1000; i <= 3000; i += 500) {
-                test_rand(i);
-            }
+            test_rand(2000);
             break;
         case 30:
-            for (int i = 1000; i <= 3000; i += 500) {
-                test_ord(i);
-            }
+            test_ord(2000);
             break;
         case 31:
             cout << "Доступные команды:" << menu << endl;

@@ -56,8 +56,12 @@ void BST<K, V>::clear() {
 template<class K, class V>
 void BST<K, V>::deleteNode(Node* node) {
 	if (node == nullptr) return;
-	deleteNode(node->left);
-	deleteNode(node->right);
+	if (node->left != nullptr) {
+		deleteNode(node->left);
+	}
+	if (node->right != nullptr) {
+		deleteNode(node->right);
+	}
 	delete node;
 }
 
@@ -168,9 +172,9 @@ V& BST<K, V>::get(K key) {
 
 template<class K, class V>
 void BST<K, V>::print() {
-	cout << "R -> t -> L(горизонт):" << endl;
-	this->printVertical(this->root, 0);
-	cout << "L -> R -> t:" << endl;
+	//cout << "R -> t -> L(горизонт):" << endl;
+	//this->printVertical(this->root, 0);
+	//cout << "L -> R -> t:" << endl;
 	this->printNode(this->root);
 }
 
@@ -195,7 +199,10 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 
 template<class K, class V>
 BST<K, V>& BST<K, V>::join(BST& tree) {
+	this->size += tree.size;
 	this->root = joinNodes(this->root, tree.root);
+	tree.root = nullptr;
+	tree.size = 0;
 	return *this;
 }
 
@@ -264,14 +271,16 @@ typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
 	if (b == nullptr) return a;
 	Node* left = a->left;
 	Node* right = a->right;
+	K key = a->key;
+	V value = a->value;
 	a->left = nullptr;
 	a->right = nullptr;
 	if (a->key == b->key) {
 		delete a;
-		return b;
+		this->size--;
 	}
 	bool inserted;
-	b = insertRoot(b, a->key, a->value, inserted);
+	b = insertRoot(b, key, value, inserted);
 	b->left = joinNodes(left, b->left);
 	b->right = joinNodes(right, b->right);
 	return b;

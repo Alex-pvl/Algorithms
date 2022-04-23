@@ -162,64 +162,6 @@ bool BST<K, V>::remove(K key) {
 }
 
 template<class K, class V>
-bool BST<K, V>::deleteNode(Node* node, K key) {
-	Node* cur = node;
-	Node* prev = nullptr;
-	while (cur != nullptr && cur->key != key) {
-		prev = cur;
-		if (key < cur->key) {
-			cur = cur->left;
-		}
-		else {
-			cur = cur->right;
-		}
-	}
-	if (cur == nullptr) {
-		return false;
-	}
-	this->size--;
-	if (cur->left == nullptr || cur->right == nullptr) {
-		Node* newCur;
-		if (cur->left == nullptr) {
-			newCur = cur->right;
-		}
-		else {
-			newCur = cur->left;
-		}
-
-		if (prev == nullptr) {
-			return newCur;
-		}
-		if (cur == prev->left) {
-			prev->left = newCur;
-		}
-		else {
-			prev->right = newCur;
-		}
-		delete cur;
-	}
-	else {
-		Node* p = nullptr;
-		Node* temp;
-		temp = cur->right;
-		while (temp->left != nullptr) {
-			p = temp;
-			temp = temp->left;
-		}
-		if (p != nullptr) {
-			p->left = temp->right;
-		}
-		else {
-			cur->right = temp->right;
-		}
-		cur->key = temp->key;
-		cur->value = temp->value;
-		delete temp;
-	}
-	return true;
-}
-
-template<class K, class V>
 V& BST<K, V>::get(K key) {
 	Node* node = this->root;
 	while (node != nullptr && node->key != key) {

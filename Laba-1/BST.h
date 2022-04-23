@@ -85,6 +85,7 @@ public:
 	// -------------- Доп методы --------------
 	void printNode(Node*);
 	void deleteNode(Node*);
+	bool deleteNode(Node*, K);
 	void copyNode(Node*);
 	Node* insertRoot(Node*, K, V, bool&);
 	Node* L(Node*);

@@ -105,50 +105,117 @@ bool BST<K, V>::put(K key, V value) {
 
 template<class K, class V>
 bool BST<K, V>::remove(K key) {
-	Node* node = this->root, * pred = nullptr, * x = nullptr, * y = nullptr;
-	while (node != nullptr && node->key != key) {
-		this->count++;
-		pred = node;
-		if (key < node->key) {
-			node = node->left;
+	Node* cur = this->root;
+	Node* prev = nullptr;
+	while (cur != nullptr && cur->key != key) {
+		prev = cur;
+		if (key < cur->key) {
+			cur = cur->left;
 		}
 		else {
-			node = node->right;
+			cur = cur->right;
 		}
 	}
-	if (node == nullptr) {
+	if (cur == nullptr) {
 		return false;
 	}
-	if (node->left == nullptr && node->right == nullptr) {
-		x = nullptr;
-	}
-	else if (node->left == nullptr) {
-		x = node->right;
-	}
-	else if (node->right == nullptr) {
-		x = node->left;
-	}
-	else {
-		y = node->right;
-		while (y->left != nullptr) {
-			y = y->left;
-		}
-		y->left = node->left;
-		x = node->right;
-	}
-	if (pred == nullptr) {
-		this->root = x;
-	}
-	else {
-		if (node->key < pred->key) {
-			pred->left = x;
+	this->size--;
+	if (cur->left == nullptr || cur->right == nullptr) {
+		Node* newCur;
+		if (cur->left == nullptr) {
+			newCur = cur->right;
 		}
 		else {
-			pred->right = x;
+			newCur = cur->left;
+		}
+
+		if (prev == nullptr) {
+			return newCur;
+		}
+		if (cur == prev->left) {
+			prev->left = newCur;
+		}
+		else {
+			prev->right = newCur;
+		}
+		delete cur;
+	}
+	else {
+		Node* p = nullptr;
+		Node* temp;
+		temp = cur->right;
+		while (temp->left != nullptr) {
+			p = temp;
+			temp = temp->left;
+		}
+		if (p != nullptr) {
+			p->left = temp->right;
+		}
+		else {
+			cur->right = temp->right;
+		}
+		cur->key = temp->key;
+		cur->value = temp->value;
+		delete temp;
+	}
+	return true;
+}
+
+template<class K, class V>
+bool BST<K, V>::deleteNode(Node* node, K key) {
+	Node* cur = node;
+	Node* prev = nullptr;
+	while (cur != nullptr && cur->key != key) {
+		prev = cur;
+		if (key < cur->key) {
+			cur = cur->left;
+		}
+		else {
+			cur = cur->right;
 		}
 	}
-	delete node;
+	if (cur == nullptr) {
+		return false;
+	}
 	this->size--;
+	if (cur->left == nullptr || cur->right == nullptr) {
+		Node* newCur;
+		if (cur->left == nullptr) {
+			newCur = cur->right;
+		}
+		else {
+			newCur = cur->left;
+		}
+
+		if (prev == nullptr) {
+			return newCur;
+		}
+		if (cur == prev->left) {
+			prev->left = newCur;
+		}
+		else {
+			prev->right = newCur;
+		}
+		delete cur;
+	}
+	else {
+		Node* p = nullptr;
+		Node* temp;
+		temp = cur->right;
+		while (temp->left != nullptr) {
+			p = temp;
+			temp = temp->left;
+		}
+		if (p != nullptr) {
+			p->left = temp->right;
+		}
+		else {
+			cur->right = temp->right;
+		}
+		cur->key = temp->key;
+		cur->value = temp->value;
+		delete temp;
+	}
 	return true;
 }
 
@@ -173,7 +240,7 @@ V& BST<K, V>::get(K key) {
 template<class K, class V>
 void BST<K, V>::print() {
 	//cout << "R -> t -> L(горизонт):" << endl;
-	//this->printVertical(this->root, 0);
+	this->printVertical(this->root, 0);
 	//cout << "L -> R -> t:" << endl;
 	this->printNode(this->root);
 }

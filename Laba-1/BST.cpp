@@ -109,6 +109,7 @@ bool BST<K, V>::remove(K key) {
 	Node* prev = nullptr;
 	while (cur != nullptr && cur->key != key) {
 		prev = cur;
+		this->count++;
 		if (key < cur->key) {
 			cur = cur->left;
 		}
@@ -200,9 +201,9 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 	if (cur == nullptr) return;
 	this->printVertical(cur->right, level+1);
 	for (int i = 0; i < level; i++) {
-		cout << "\t";
+		cout << "   ";
 	}
-	cout << cur->key << "[" << cur->value << "]\n";
+	cout << cur->key << endl;
 	this->printVertical(cur->left, level+1);
 }
 
@@ -297,9 +298,7 @@ typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
 
 template<class K, class V>
 int BST<K, V>::countNodes() {
-	int k = this->count;
-	this->count = 0;
-	return k;
+	return this->count;
 }
 
 template<class K, class V>

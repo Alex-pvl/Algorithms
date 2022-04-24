@@ -28,6 +28,7 @@ public:
 		bool operator==(Iterator&);
 		// проверка неравенства однотипных итераторов
 		bool operator!=(Iterator&);
+		// убрать от пользователя
 		Node* nextNode(Node*);
 		
 	};
@@ -47,6 +48,7 @@ public:
 		bool operator==(RevIterator&);
 		// проверка неравенства однотипных итераторов
 		bool operator!=(RevIterator&);
+		// убрать от пользователя
 		Node* nextNode(Node*);
 	};
 	friend class Node;
@@ -83,6 +85,7 @@ public:
 	RevIterator rend();
 
 	// -------------- Доп методы --------------
+	// убрать от пользователя
 	void printNode(Node*);
 	void deleteNode(Node*);
 	void copyNode(Node*);
@@ -93,7 +96,7 @@ public:
 	int countNodes();
 	void clearCount();
 
-	// -------------- для теста, потом удалю --
+	// ------------- для теста ----------------
 	void printVertical(Node*, int);
 
 private:

@@ -85,7 +85,7 @@ void test_rand(int n) {
     //вывод размера дерева после теста
     cout << "items count: " << tree.getSize() << endl;
     //теоретической оценки трудоёмкости операций BST
-    cout << "1.39*log2(n)=" << 1.39 * (log((double)n) / log(2.0)) << endl;
+    cout << "1.39*log2(n)= " << 1.39 * (log((double)n) / log(2.0)) << endl;
     //экспериментальной оценки трудоёмкости вставки
     cout << "Count insert: " << I / (n / 2) << endl;
     //экспериментальной оценки трудоёмкости удаления
@@ -157,7 +157,7 @@ void test_ord(int n) {
     //вывод размера дерева после теста
     cout << "items count: " << tree.getSize() << endl;
     //теоретической оценки трудоёмкости операций BST
-    cout << "n/2 =" << n / 2 << endl;
+    cout << "n/2 = " << n / 2 << endl;
     //экспериментальной оценки трудоёмкости вставки
     cout << "Count insert: " << I / (n / 2) << endl;
     //экспериментальной оценки трудоёмкости удаления
@@ -370,10 +370,10 @@ int main() {
             cout << "\nГлавное меню: " << endl;
             break;
         case 29:
-            test_rand(2000);
+            test_rand(1000);
             break;
         case 30:
-            test_ord(2000);
+            test_ord(1000);
             break;
         case 31:
             cout << "Доступные команды:" << menu << endl;

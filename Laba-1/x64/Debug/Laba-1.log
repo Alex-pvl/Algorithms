@@ -5,5 +5,6 @@ C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(11,36): warning 
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(12,7): warning C4114: Множественное использование одного и того же квалификатора типа.
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(13,7): warning C4114: Множественное использование одного и того же квалификатора типа.
 C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(18,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  RandTree.cpp
   Создание кода...
   Laba-1.vcxproj -> C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe

@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
     <ClCompile Include="Laba-1.cpp" />
+    <ClCompile Include="RandTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST.h" />
+    <ClInclude Include="RandTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

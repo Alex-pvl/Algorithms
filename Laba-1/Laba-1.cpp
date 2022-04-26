@@ -370,10 +370,10 @@ int main() {
             cout << "\nГлавное меню: " << endl;
             break;
         case 29:
-            test_rand(1000);
+            test_rand(15000);
             break;
         case 30:
-            test_ord(1000);
+            test_ord(15000);
             break;
         case 31:
             cout << "Доступные команды:" << menu << endl;

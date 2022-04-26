@@ -182,9 +182,7 @@ V& BST<K, V>::get(K key) {
 
 template<class K, class V>
 void BST<K, V>::print() {
-	//cout << "R -> t -> L(горизонт):" << endl;
 	this->printVertical(this->root, 0);
-	//cout << "L -> R -> t:" << endl;
 	this->printNode(this->root);
 }
 

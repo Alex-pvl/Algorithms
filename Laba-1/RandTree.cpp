@@ -20,7 +20,6 @@ bool RandTree<K, V>::put(K key, V value) {
 template<class K, class V>
 typename RandTree<K, V>::Node* RandTree<K, V>::put(Node* t, K key, V value, bool& inserted) {
 	if (t == nullptr) {
-		
 		t = new Node(key, value);
 		t->n = 1;
 		inserted = true;

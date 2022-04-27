@@ -183,6 +183,7 @@ V& BST<K, V>::get(K key) {
 template<class K, class V>
 void BST<K, V>::print() {
 	this->printVertical(this->root, 0);
+	cout << endl;
 	this->printNode(this->root);
 }
 
@@ -223,6 +224,7 @@ typename BST<K, V>::Node* BST<K, V>::insertRoot(Node* node, K key, V value, bool
 	}
 	if (key == node->key) {
 		inserted = false;
+		this->size--;
 		return node;
 	}
 	if (key < node->key) {
@@ -285,7 +287,7 @@ typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
 	a->right = nullptr;
 	if (a->key == b->key) {
 		delete a;
-		this->size--;
+		
 	}
 	bool inserted;
 	b = insertRoot(b, key, value, inserted);
@@ -300,7 +302,7 @@ int BST<K, V>::countNodes() {
 }
 
 template<class K, class V>
-void BST<K, V>::clearCount() {
+void BST<K, V>::clearCount() {		
 	this->count = 0;
 }
 

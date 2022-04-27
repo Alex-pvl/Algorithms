@@ -5,19 +5,14 @@
 template<class K, class V> 
 class RandTree : public BST<K, V>
 {
-	class Node : public BST<K, V>::Node{
-	public:
-		// количество узлов в поддереве данного дерева
-		int n;
-	};
 	// Пересчёт параметра n для дерева
-	void calcAll(Node*);
+	void calcAll(typename BST<K, V>::Node*);
 	// Включение данных с заданным ключом
-	Node* put(Node*, K, V, bool&);
+	typename BST<K, V>::Node* put(typename BST<K, V>::Node*, K, V, bool&);
 	// Удаление данных с заданным ключом
-	Node* remove(Node*, K, bool&);
+	typename BST<K, V>::Node* remove(typename BST<K, V>::Node*, K, bool&);
 	// Решение об объединении поддеревьев
-	Node* join(Node*, Node*);
+	typename BST<K, V>::Node* join(typename BST<K, V>::Node*, typename BST<K, V>::Node*);
 	
 public:
 	// переопределение BST::put

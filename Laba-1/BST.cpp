@@ -181,10 +181,15 @@ V& BST<K, V>::get(K key) {
 }
 
 template<class K, class V>
-void BST<K, V>::print() {
+void BST<K, V>::printLRT() {
+	this->printNode(this->root);
+	cout << endl;
+}
+
+template<class K, class V>
+void BST<K, V>::printVert() {
 	this->printVertical(this->root, 0);
 	cout << endl;
-	this->printNode(this->root);
 }
 
 template<class K, class V>
@@ -219,17 +224,17 @@ template<class K, class V>
 typename BST<K, V>::Node* BST<K, V>::insertRoot(Node* node, K key, V value, bool &ins) {
 	bool inserted;
 	if (node == nullptr) {
-		inserted = true;
+		ins = true;
 		return new Node(key, value);
 	}
 	if (key == node->key) {
-		inserted = false;
+		ins = false;
 		this->size--;
 		return node;
 	}
 	if (key < node->key) {
 		node->left = insertRoot(node->left, key, value, inserted);
-		inserted = ins;
+		ins = inserted;
 		if (ins) {
 			return R(node);
 		}
@@ -239,7 +244,7 @@ typename BST<K, V>::Node* BST<K, V>::insertRoot(Node* node, K key, V value, bool
 	}
 	else {
 		node->right = insertRoot(node->right, key, value, inserted);
-		inserted = ins;
+		ins = inserted;
 		if (ins) {
 			return L(node);
 		}
@@ -289,7 +294,7 @@ typename BST<K, V>::Node* BST<K, V>::joinNodes(Node* a, Node* b) {
 		delete a;
 		
 	}
-	bool inserted;
+	bool inserted = false;
 	b = insertRoot(b, key, value, inserted);
 	b->left = joinNodes(left, b->left);
 	b->right = joinNodes(right, b->right);

@@ -10,9 +10,12 @@ protected:
 		V value;
 		Node* left;
 		Node* right;
+		// количество узлов в поддереве данного дерева
+		int n;
 	};
 
 public:
+	
 	class Iterator {
 		BST* tree;
 		Node* cur;
@@ -72,7 +75,7 @@ public:
 	// доступ по чтению/записи к данным по ключу
 	V& get(K);
 	// формирование списка ключей в дереве в порядке обхода узлов по схеме
-	void print();
+	void printLRT();
 	// объединение двух BST-деревьев
 	BST& join(BST&);
 	// запрос прямого итератора, установленного на узел дерева с минимальным ключом
@@ -86,6 +89,7 @@ public:
 
 	// -------------- Доп методы --------------
 	// убрать от пользователя
+	void printVert();
 	void printNode(Node*);
 	void deleteNode(Node*);
 	void copyNode(Node*);

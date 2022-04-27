@@ -1,12 +1,14 @@
-﻿#include <iostream>
+﻿#pragma once
+#include <iostream>
 #include <string>
 #include "BST.cpp"
+#include "RandTree.cpp"
 #include <math.h>
 #include <time.h>
 using namespace std;
 typedef unsigned long long INT_64;
 
-//переменная и константы генератора LineRand()
+/*//переменная и константы генератора LineRand()
 static INT_64 RRand = 15750;
 const const INT_64 mRand = (1 << 63) - 1;
 const const INT_64 aRand = 6364136223846793005;
@@ -167,12 +169,13 @@ void test_ord(int n) {
     //освобождение памяти массива m[]
     delete[] m;
 }
-
+*/
 int main() {
     setlocale(LC_ALL, "ru");
-    int mode = -1, mode2 = -1, modePrint;
+    int mode = -1, mode2 = -1;
     BST<int, int> tree1;
     BST<int, int> tree2;
+    RandTree<int, int> rt;
     BST<int, int>::Iterator iter(tree1);
     BST<int, int>::RevIterator riter(tree1);
     BST<int, int>::Iterator checkBegin;
@@ -224,17 +227,17 @@ int main() {
             break;
         case 6:
             cin >> key >> value;
-            cout << tree1.put(key, value) << endl;
+            cout << rt.put(key, value) << endl;
             break;
         case 7:
             cin >> key;
-            cout << tree1.remove(key) << endl;
+            cout << rt.remove(key) << endl;
             break;
         case 8:
-            tree1.printVert();
+            rt.printVert();
             break;
         case 9:
-            tree1.join(tree2);
+            //tree1.join(tree2);
             break;
         case 10:
             iter = tree1.begin();
@@ -369,10 +372,10 @@ int main() {
             cout << "\nГлавное меню: " << endl;
             break;
         case 29:
-            test_rand(5000);
+            //test_rand(5000);
             break;
         case 30:
-            test_ord(5000);
+            //test_ord(5000);
             break;
         case 31:
             cout << "Доступные команды:" << menu << endl;
@@ -386,5 +389,6 @@ int main() {
             break;
         }
     }
+    
     return 0;
 }

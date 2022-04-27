@@ -207,7 +207,7 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 	for (int i = 0; i < level; i++) {
 		cout << "   ";
 	}
-	cout << cur->key << endl;
+	cout << cur->key << "(" << cur->n << ")" << endl;
 	this->printVertical(cur->left, level+1);
 }
 

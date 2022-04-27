@@ -14,6 +14,10 @@ protected:
 		int n;
 	};
 
+	Node* root;
+	int size;
+	int count;
+
 public:
 	
 	class Iterator {
@@ -104,7 +108,5 @@ public:
 	void printVertical(Node*, int);
 
 private:
-	Node* root;
-	int size;
-	int count;
+	
 };

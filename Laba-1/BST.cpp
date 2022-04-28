@@ -146,6 +146,7 @@ bool BST<K, V>::remove(K key) {
 		Node* temp;
 		temp = cur->right;
 		while (temp->left != nullptr) {
+			this->count++;
 			p = temp;
 			temp = temp->left;
 		}
@@ -207,7 +208,7 @@ void BST<K, V>::printVertical(Node* cur, int level) {
 	for (int i = 0; i < level; i++) {
 		cout << "   ";
 	}
-	cout << cur->key << endl;
+	cout << cur->key << "(" << cur->n << ")" << endl;
 	this->printVertical(cur->left, level+1);
 }
 

@@ -193,11 +193,11 @@ int main() {
         switch (mode)
         {
         case 1:
-            treeSize = tree1.getSize();
+            treeSize = rt.getSize();
             cout << treeSize << endl;
             break;
         case 2:
-            tree1.clear();
+            rt.clear();
             cout << "Дерево очищено" << endl;
             break;
         case 3:
@@ -228,6 +228,7 @@ int main() {
         case 6:
             cin >> key >> value;
             cout << rt.put(key, value) << endl;
+            rt.printVert();
             break;
         case 7:
             cin >> key;

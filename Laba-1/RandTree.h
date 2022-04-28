@@ -15,7 +15,11 @@ class RandTree : public BST<K, V>
 	typename BST<K, V>::Node* remove(typename BST<K, V>::Node*, K, bool&);
 	// Решение об объединении поддеревьев
 	typename BST<K, V>::Node* join(typename BST<K, V>::Node*, typename BST<K, V>::Node*);
-
+	
+	typename BST<K, V>::Node* R(typename BST<K, V>::Node*);
+	typename BST<K, V>::Node* L(typename BST<K, V>::Node*);
+	typename BST<K, V>::Node* insertRoot(typename BST<K, V>::Node* node, K key, V value, bool& inserted);
+	typename BST<K, V>::Node* insertRoot(typename BST<K, V>::Node*, K, V);
 
 	// --------- Доп методы ----------
 	int getN(typename BST<K, V>::Node*);
@@ -26,8 +30,5 @@ public:
 	// переопределение BST::remove
 	bool remove(K);
 
-	typename BST<K, V>::Node* R(typename BST<K, V>::Node*);
-	typename BST<K, V>::Node* L(typename BST<K, V>::Node*);
-	typename BST<K, V>::Node* insertRoot(typename BST<K, V>::Node* node, K key, V value, bool& inserted);
-	typename BST<K, V>::Node* insertRoot(typename BST<K, V>::Node*, K, V);
+	
 };

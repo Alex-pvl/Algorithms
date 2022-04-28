@@ -19,8 +19,9 @@ typename BST<K, V>::Node* RandTree<K, V>::R(typename BST<K, V>::Node* node) {
 	if (!x) return node;
 	node->left = x->right;
 	x->right = node;
-	x->n = node->n;
+	x->n = getN(node);
 	fixN(node);
+	fixN(x);
 	return x;
 }
 
@@ -30,8 +31,9 @@ typename BST<K, V>::Node* RandTree<K, V>::L(typename BST<K, V>::Node* node) {
 	if (!x) return node;
 	node->right = x->left;
 	x->left = node;
-	x->n = node->n;
+	x->n = getN(node);
 	fixN(node);
+	fixN(x);
 	return x;
 }
 
@@ -42,13 +44,16 @@ typename BST<K, V>::Node* RandTree<K, V>::insertRoot(typename BST<K, V>::Node* n
 		return new typename BST<K, V>::Node(key, value);
 	}
 	bool ins;
+	if (key == node->key) {
+		inserted = false;
+		return node;
+	}
 	if (key < node->key) {
 		node->left = RandTree<K, V>::insertRoot(node->left, key, value, ins);
 		inserted = ins;
 		return RandTree<K, V>::R(node);
 	}
 	else {
-		//if (key == node->key) inserted = false;
 		node->right = RandTree<K, V>::insertRoot(node->right, key, value, ins);
 		inserted = ins;
 		return RandTree<K, V>::L(node);
@@ -72,15 +77,15 @@ typename BST<K, V>::Node* RandTree<K, V>::put(typename BST<K, V>::Node* node, K 
 	}
 	srand(clock());
 	bool ins;
-	if (rand() % (getN(node) + 1) == 0) {
+	if (rand() % (node->n + 1) == 0) {
 		node = RandTree<K, V>::insertRoot(node, key, value, ins);
 		inserted = ins;
 		return node;
 	}
-	/*if (key == node->key) {
+	if (key == node->key) {
 		inserted = false;
 		return node;
-	}*/
+	}
 	if (node->key > key) {
 		node->left = RandTree<K, V>::put(node->left, key, value, ins);
 	}
@@ -88,7 +93,9 @@ typename BST<K, V>::Node* RandTree<K, V>::put(typename BST<K, V>::Node* node, K 
 		node->right = RandTree<K, V>::put(node->right, key, value, ins);
 	}
 	inserted = ins;
-	fixN(node);
+	if (inserted) {
+		node->n++;
+	}
 	return node;
 }
 
@@ -106,19 +113,30 @@ typename BST<K, V>::Node* RandTree<K, V>::remove(typename BST<K, V>::Node* node,
 		return node;
 	}
 	bool del;
-	if (key == node->key) {
-		deleted = true;
-		typename BST<K, V>::Node* tmp = RandTree::join(node->left, node->right);
-		delete node;
-		return tmp;
-	}
-	else if (key < node->key) {
+	if (key < node->key) {
 		node->left = RandTree::remove(node->left, key, del);
 	}
-	else {
+	else if (key > node->key) {
 		node->right = RandTree::remove(node->right, key, del);
 	}
+	else {
+		del = true;
+		typename BST<K, V>::Node* tmp = RandTree::join(node->left, node->right);
+		delete node;
+		node = tmp;
+	}
 	deleted = del;
+	if (deleted) {
+		if (node->left) {
+			node->n = 1 + getN(node->left);
+		}
+		else {
+			node->n = 1;
+		}
+		if (node->right) {
+			node->n += getN(node->right);
+		}
+	}
 	return node;
 }
 
@@ -127,7 +145,7 @@ typename BST<K, V>::Node* RandTree<K, V>::join(typename BST<K, V>::Node* a, type
 	if (!a) return b;
 	if (!b) return a;
 	srand(clock());
-	if (rand() % (getN(a) + getN(b)) < a->n) {
+	if (rand() % (getN(a) + getN(b)) < getN(a)) {
 		a->right = RandTree::join(a->right, b);
 		fixN(a);
 		return a;

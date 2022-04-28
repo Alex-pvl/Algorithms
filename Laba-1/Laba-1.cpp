@@ -279,10 +279,9 @@ void test_ord(int n) {
 int main() {
     setlocale(LC_ALL, "ru");
     int mode = -1;
-    BST<int, int> tree1;
     RandTree<int, int> rt;
-    BST<int, int>::Iterator iter(tree1);
-    BST<int, int>::RevIterator riter(tree1);
+    BST<int, int>::Iterator iter(rt);
+    BST<int, int>::RevIterator riter(rt);
     BST<int, int>::Iterator checkBegin;
     BST<int, int>::RevIterator checkRBegin;
     BST<int, int>::Iterator checkEnd;

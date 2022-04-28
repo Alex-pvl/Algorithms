@@ -39,11 +39,11 @@ typename BST<K, V>::Node* RandTree<K, V>::L(typename BST<K, V>::Node* node) {
 
 template<class K, class V>
 typename BST<K, V>::Node* RandTree<K, V>::insertRoot(typename BST<K, V>::Node* node, K key, V value, bool& inserted) {
-	this->count++;
 	if (!node) {
 		inserted = true;
 		return new typename BST<K, V>::Node(key, value);
 	}
+	this->count++;
 	bool ins;
 	if (key == node->key) {
 		inserted = false;
@@ -65,19 +65,19 @@ template<class K, class V>
 bool RandTree<K, V>::put(K key, V value) {
 	bool ins;
 	this->root = put(this->root, key, value, ins);
-	if (ins) size++;
+	if (ins) this->size++;
 	return ins;
 }
 
 template<class K, class V>
 typename BST<K, V>::Node* RandTree<K, V>::put(typename BST<K, V>::Node* node, K key, V value, bool &inserted) {
-	this->count++;
 	if (!node) {
 		typename BST<K, V>::Node* t = new typename BST<K, V>::Node(key, value);
 		t->n = 1;
 		inserted = true;
 		return t;
 	}
+	this->count++;
 	srand(clock());
 	bool ins;
 	if (rand() % (node->n + 1) == 0) {
@@ -106,17 +106,17 @@ template<class K, class V>
 bool RandTree<K, V>::remove(K key) {
 	bool del;
 	this->root = RandTree::remove(this->root, key, del);
-	if (del) size--;
+	if (del) this->size--;
 	return del;
 }
 
 template<class K, class V>
 typename BST<K, V>::Node* RandTree<K, V>::remove(typename BST<K, V>::Node* node, K key, bool &deleted) {
-	this->count++;
 	if (!node) {
 		deleted = false;
 		return node;
 	}
+	this->count++;
 	bool del;
 	if (key < node->key) {
 		node->left = RandTree::remove(node->left, key, del);
@@ -132,14 +132,16 @@ typename BST<K, V>::Node* RandTree<K, V>::remove(typename BST<K, V>::Node* node,
 	}
 	deleted = del;
 	if (deleted) {
-		if (node->left) {
-			node->n = 1 + getN(node->left);
-		}
-		else {
-			node->n = 1;
-		}
-		if (node->right) {
-			node->n += getN(node->right);
+		if (node) {
+			if (node->left) {
+				node->n = 1 + getN(node->left);
+			}
+			else {
+				node->n = 1;
+			}
+			if (node->right) {
+				node->n += getN(node->right);
+			}
 		}
 	}
 	return node;
@@ -147,12 +149,13 @@ typename BST<K, V>::Node* RandTree<K, V>::remove(typename BST<K, V>::Node* node,
 
 template<class K, class V>
 typename BST<K, V>::Node* RandTree<K, V>::join(typename BST<K, V>::Node* a, typename BST<K, V>::Node* b) {
-	this->count++;
 	if (!a) return b;
 	if (!b) return a;
+	this->count++;
 	srand(clock());
 	if (rand() % (getN(a) + getN(b)) < getN(a)) {
 		a->right = RandTree::join(a->right, b);
+
 		fixN(a);
 		return a;
 	}

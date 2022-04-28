@@ -146,6 +146,7 @@ bool BST<K, V>::remove(K key) {
 		Node* temp;
 		temp = cur->right;
 		while (temp->left != nullptr) {
+			this->count++;
 			p = temp;
 			temp = temp->left;
 		}

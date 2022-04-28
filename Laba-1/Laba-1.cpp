@@ -304,13 +304,13 @@ int main() {
             cout << "Дерево очищено" << endl;
             break;
         case 3:
-            cout << tree1.isEmpty() << endl;
+            cout << rt.isEmpty() << endl;
             break;
         case 4:
             cin >> key;
             try
             {
-                cout << tree1.get(key) << endl;
+                cout << rt.get(key) << endl;
             }
             catch (const exception e)
             {
@@ -321,7 +321,7 @@ int main() {
             cin >> key >> newValue;
             try
             {
-                tree1.get(key) = newValue;
+                rt.get(key) = newValue;
             }
             catch (const exception e)
             {
@@ -331,7 +331,6 @@ int main() {
         case 6:
             cin >> key >> value;
             cout << rt.put(key, value) << endl;
-            rt.printVert();
             break;
         case 7:
             cin >> key;
@@ -341,10 +340,10 @@ int main() {
             rt.printVert();
             break;
         case 9:
-            iter = tree1.begin();
+            iter = rt.begin();
             break;
         case 10:
-            iter = tree1.end();
+            iter = rt.end();
             break;
         case 11:
             try
@@ -378,26 +377,26 @@ int main() {
             }
             break;
         case 14:
-            checkBegin = tree1.begin();
+            checkBegin = rt.begin();
             cout << (iter == checkBegin) << endl;
             break;
         case 15:
-            checkEnd = tree1.end();
+            checkEnd = rt.end();
             cout << (iter == checkEnd) << endl;
             break;
         case 16:
-            checkBegin = tree1.begin();
+            checkBegin = rt.begin();
             cout << (iter != checkBegin) << endl;
             break;
         case 17:
-            checkEnd = tree1.end();
+            checkEnd = rt.end();
             cout << (iter != checkEnd) << endl;
             break;
         case 18:
-            riter = tree1.rbegin();
+            riter = rt.rbegin();
             break;
         case 19:
-            riter = tree1.rend();
+            riter = rt.rend();
             break;
         case 20:
             try
@@ -431,19 +430,19 @@ int main() {
             }
             break;
         case 23:
-            checkRBegin = tree1.rbegin();
+            checkRBegin = rt.rbegin();
             cout << (riter == checkRBegin) << endl;
             break;
         case 24:
-            checkREnd = tree1.rend();
+            checkREnd = rt.rend();
             cout << (riter == checkREnd) << endl;
             break;
         case 25:
-            checkRBegin = tree1.rbegin();
+            checkRBegin = rt.rbegin();
             cout << (riter != checkRBegin) << endl;
             break;
         case 26:
-            checkREnd = tree1.rend();
+            checkREnd = rt.rend();
             cout << (riter != checkREnd) << endl;
             break;
         case 27:
@@ -460,7 +459,7 @@ int main() {
             cout << "Доступные команды:" << menu << endl;
             break;
         case 30:
-            tree1.printLRT();
+            rt.printLRT();
             break;
         case 0:
             return -1;

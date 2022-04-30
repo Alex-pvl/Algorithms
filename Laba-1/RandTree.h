@@ -21,6 +21,7 @@ class RandTree : public BST<K, V>
 	typename BST<K, V>::Node* join(typename BST<K, V>::Node*, typename BST<K, V>::Node*);
 	
 	// --------- Доп методы ----------
+	// получение размера поддерева
 	int getN(typename BST<K, V>::Node*);
 	
 public:

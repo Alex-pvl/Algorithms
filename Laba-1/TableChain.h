@@ -1,5 +1,7 @@
 #pragma once
+#include <iostream>
 #include "TableForm.h"
+using namespace std;
 template <class K, class D>
 class TableChain : public TableForm <K, D>
 {
@@ -35,4 +37,19 @@ public:
 		throw (-1);
 	}
 
+	void Clear() {
+
+	}
+
+	bool Delete(K key) {
+
+	}
+
+	bool Insert(K key, D data) {
+
+	}
+
+	void Print() {
+
+	}
 };

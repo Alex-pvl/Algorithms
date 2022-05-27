@@ -8,6 +8,7 @@ public:
 	unsigned int Size;
 	unsigned int Capacity;
 	unsigned int Probes;
+	unsigned int counter;
 	double A;//константа для хеш-функции
 	TableForm() { 
 		Size = Probes = 0;

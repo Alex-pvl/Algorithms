@@ -38,18 +38,70 @@ public:
 	}
 
 	void Clear() {
-
+		for (int i = 0; i < this->Capacity; i++) {
+			Node* node = Table[i];
+			while (node != nullptr) {
+				Node* tmp = node;
+				node = node->next;
+				delete tmp;
+			}
+		}
+		this->Size = 0;
 	}
 
 	bool Delete(K key) {
-
+		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key);
+		Node* node = this->Table[index];
+		if (node->key == key) {
+			Table[index] = node->next;
+			delete node;
+			this->Size--;
+			this->counter++;
+			return true;
+		}
+		while (node != nullptr) {
+			this->counter++;
+			if (node->next->key == key) {
+				Node* tmp = node->next;
+				node->next = tmp->next;
+				delete tmp;
+				this->Size--;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool Insert(K key, D data) {
-
+		Node* node = this->Table[TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key)];
+		if (node == nullptr) {
+			node = new Node(key, data);
+			this->counter++;
+			this->Size++;
+		}
+		while (node->next != nullptr) {
+			this->counter++;
+			if (node->key == key) {
+				return false;
+			}
+			node = node->next;
+		}
+		this->counter++;
+		Node* tmp = new Node(key, data);
+		node->next = tmp;
+		this->Size++;
+		return true;
 	}
 
 	void Print() {
-
+		for (int i = 0; i < capacity; ++i) {
+			cout << i << ". ";
+			Node* ptr = Table[i];
+			while (ptr != 0) {
+				cout << ptr->key << ':' << ptr->data << '\t';
+				ptr = ptr->next;
+			}
+			cout << '\n';
+		}
 	}
 };

@@ -14,6 +14,9 @@ public:
 		Size = Probes = 0;
 		A = (sqrt(5.) - 1.0) / 2.0; 
 	}
+	~TableForm() {
+		Clear();
+	}
 	unsigned int Hash(unsigned long long key) { 
 		return (unsigned int) (Capacity * (A * key - int(A * key))); 
 	}

@@ -1,15 +1,32 @@
 #pragma once
+#include "TableChain.h"
+#include "TableOpen.h"
+#include "ItChain.h"
+#include "ItOpen.h"
 template < class K, class D>
 class HashTable {
 protected:
     TableForm<K, D>* Tform;
 public:
     HashTable(int size) { 
-        Tform = (TableForm<K, D>*) (new TableChain<K, D>(size)); 
+        Tform = (TableForm<K, D>*) (new TableChain<K, D>(size));
     }
-    bool Form();
-    void ToChain(int size);
-    void ToOpen(int size);
+    bool Form() {
+        if (typeid(*Tform) == TableChain) {
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+    void ToChain(int size) {
+        delete Tform;
+        Tform = (TableForm<K, D>*) (new TableChain<K, D>(size));
+    }
+    void ToOpen(int size) {
+        delete Tform;
+        Tform = (TableForm<K, D>*) (new TableOpen<K, D>(size));
+    }
     unsigned int getSize() { 
         return Tform->getSize(); 
     }

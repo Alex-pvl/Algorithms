@@ -107,5 +107,52 @@ public:
 	unsigned int h(unsigned long long key, int i) {
 		return (TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key)) + i) % this->Capacity;
 	}
+
+	class Iterator {
+	public:
+		Iterator(TableOpen& table) {
+			this->table = table;
+			this->index = 0;
+			this->end = false;
+			for (; this->table[this->index].state != 'b'; this->index++) {
+				if (i >= table.Capacity) {
+					this->end = true;
+					this->index = -1;
+				}
+			}
+		}
+
+		D& operator *() {
+			if (end) {
+				throw(-1);
+			}
+			return this->table[this->index]->data;
+		}
+
+		Iterator operator ++() {
+			if (end) {
+				throw (-1);
+			}
+			for (; this->table[this->index].state != 'b'; this->index++) {
+				if (i >= table.Capacity) {
+					this->end = true;
+					this->index = -1;
+					return *this;
+				}
+			}
+			return *this;
+		}
+
+		bool operator==(const Iterator& iter) {
+			return (this->index == iter.index);
+		}
+		bool operator!=(const Iterator& iter) {
+			return (this->index != iter.index);
+		}
+	private:
+		int index;
+		bool end;
+		TableOpen table;
+	};
 };
 

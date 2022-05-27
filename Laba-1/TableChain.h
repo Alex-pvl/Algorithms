@@ -104,4 +104,64 @@ public:
 			cout << '\n';
 		}
 	}
+
+	class Iterator {
+	public:
+		Iterator(TableChain& table) {
+			this->table = table;
+			this->index = 0;
+			this->end = false;
+			for (; this->table[this->index] == nullptr; this->index++) {
+				if (this->index >= this->table.Capacity) {
+					this->end = true;
+					this->index = -1;
+					this->node = nullptr;
+				}
+			}
+			if (!end) {
+				this->node = this->table[this->index];
+			}
+		}
+
+		D& operator *() {
+			if (end) {
+				throw(-1);
+			}
+			return this->node->data;
+		}
+
+		Iterator operator ++() {
+			if (end) {
+				throw (-1);
+			}
+			if (this->node->next != nullptr) {
+				this->node = this->node->next;
+				return *this;
+			}
+			for (; this->table[this->index] == nullptr; this->index++) {
+				if (this->index >= this->table.Capacity) {
+					this->end = true;
+					this->index = -1;
+					this->node = nullptr;
+					return *this;
+				}
+			}
+			if (!end) {
+				this->node = this->table[this->index];
+			}
+			return *this;
+		}
+
+		bool operator==(const Iterator& iter) {
+			return (this->node == iter.node);
+		}
+		bool operator!=(const Iterator& iter) {
+			return (this->node != iter.node);
+		}
+	private:
+		int index;
+		bool end;
+		TableChain table;
+		Node* node;
+	};
 };

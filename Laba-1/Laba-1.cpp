@@ -96,14 +96,17 @@ void testTable() {
 
             // поиск существующего ключа
             try {
-                tableOpen->Data(arr[rand() % k]);
-                S1 += tableOpen->counter;
-
+                tableChain->Data(arr[rand() % k]);
+                S2 += tableChain->counter;
+            }
+            catch (int& ex) {}
+            try {
                 tableChain->Data(arr[rand() % k]);
                 S2 += tableChain->counter;
             }
             catch (int& ex) {}
         }
+
 
         
     }
@@ -156,7 +159,7 @@ void testXI() {
         val = SRand();
         res = 0;
         for (int i = 0; i < val.length(); i++) {
-            res += val[val.length() - i] * pow(26, i);
+            res += val[val.length() - i - 1] * pow(26, i);
         }
         double A = 0.6180339887;
         long long h = M * fmodl(res * A, 1.0);

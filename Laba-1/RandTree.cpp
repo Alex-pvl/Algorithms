@@ -80,7 +80,7 @@ typename BST<K, V>::Node* RandTree<K, V>::put(typename BST<K, V>::Node* node, K 
 	this->count++;
 	srand(clock());
 	bool ins;
-	if (rand() % (node->n + 1) == 0) {
+	if (rand() < RAND_MAX/(node->n + 1)) {
 		node = RandTree<K, V>::insertRoot(node, key, value, ins);
 		inserted = ins;
 		return node;
@@ -153,9 +153,8 @@ typename BST<K, V>::Node* RandTree<K, V>::join(typename BST<K, V>::Node* a, type
 	if (!b) return a;
 	this->count++;
 	srand(clock());
-	if (rand() % (getN(a) + getN(b)) < getN(a)) {
+	if (rand()/(RAND_MAX/(getN(a)+getN(b)+1)) < getN(a)) {
 		a->right = RandTree::join(a->right, b);
-
 		fixN(a);
 		return a;
 	}

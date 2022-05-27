@@ -140,12 +140,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
+    <ClCompile Include="HashTable.cpp" />
+    <ClCompile Include="ItChain.cpp" />
+    <ClCompile Include="ItForm.cpp" />
+    <ClCompile Include="ItOpen.cpp" />
     <ClCompile Include="Laba-1.cpp" />
     <ClCompile Include="RandTree.cpp" />
+    <ClCompile Include="TableChain.cpp" />
+    <ClCompile Include="TableForm.cpp" />
+    <ClCompile Include="TableOpen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST.h" />
+    <ClInclude Include="HashTable.h" />
+    <ClInclude Include="ItChain.h" />
+    <ClInclude Include="ItForm.h" />
+    <ClInclude Include="ItOpen.h" />
     <ClInclude Include="RandTree.h" />
+    <ClInclude Include="TableChain.h" />
+    <ClInclude Include="TableForm.h" />
+    <ClInclude Include="TableOpen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

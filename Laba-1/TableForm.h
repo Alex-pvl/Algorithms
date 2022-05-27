@@ -23,7 +23,7 @@ public:
 		string k = key;
 		unsigned long long res = 0;
 		for (int i = 0; i < k.length(); i++) {
-			res += k[k.length() - i] * pow(32, i);
+			res += k[k.length() - i] * pow(26, i);
 		}
 		return res; 
 	}

@@ -7,24 +7,173 @@
 #include <time.h>
 using namespace std;
 
-int randCahr() {
+int randChar() {
     return (rand() % 26);
 }
 
 string SRand() {
+    srand(time(0));
     string str;
-    int lenght = (rand() % 6) + 5;
+    int lenght = rand() % 6 + 5;
     for (int i = 0; i < lenght; i++) {
-        char c = (90 - randCahr());
+        char c = (90 - randChar());
         str += c;
     }
     return str;
 }
 
-void testTable(bool form) {
-    int size;
+void testTable() {
+    srand(time(0));
+    int size, k;
+    double alpha;
+    cout << "Введите количество элементов: ";
     cin >> size;
-    //HashTable<string, int>* table = new HashTable<string, int>(form, size);
+    cout << "Введите заполненность хеш-таблицы: ";
+    cin >> alpha;
+    TableOpen<string, int>* tableOpen = new TableOpen<string, int>(size);
+    TableChain<string, int>* tableChain = new TableChain<string, int>(size);
+    k = tableOpen->getCapacity() * alpha;
+    cout << "items count (ОА): " << tableOpen->getCapacity() << endl;
+    cout << "items count (ЦК): " << tableChain->getCapacity() << endl;
+
+    string* arr = new string[k];
+
+    int I1 = 0, D1 = 0, S1 = 0,
+        I2 = 0, D2 = 0, S2 = 0;
+
+    for (int i = 0; i < k; i++) {
+        arr[i] = SRand();
+        tableOpen->Insert(arr[i], 1);
+        tableChain->Insert(arr[i], 1);
+    }
+
+    for (int i = 0; i < k / 2; i++) {
+        if (i % 10 == 0) {// 10% промаха
+            // удаление случайного элемента
+            tableOpen->Delete(SRand());
+            D1 += tableOpen->counter;
+
+            tableChain->Delete(SRand());
+            D2 += tableChain->counter;
+
+            // вставка уже существующего элемента
+            tableOpen->Insert(arr[rand() % k], 1);
+            I1 += tableOpen->counter;
+
+            tableChain->Insert(arr[rand() % k], 1);
+            I2 += tableChain->counter;
+
+            // поиск по случайному ключу
+            try {
+                tableOpen->Data(SRand());
+                S1 += tableOpen->counter;
+            }
+            catch (int& ex) {}
+            try {
+                tableChain->Data(SRand());
+                S2 += tableChain->counter;
+            }
+            catch (int& ex) {}
+        }
+        else {
+            // удаление существующего ключа
+            int del = rand() % k;
+            tableOpen->Delete(arr[del]);
+            D1 += tableOpen->counter;
+
+            tableChain->Delete(arr[del]);
+            D2 += tableChain->counter;
+
+            // вставка с новым ключом
+            string newKey = SRand();
+            tableOpen->Insert(newKey, 1);
+            I1 += tableOpen->counter;
+
+            tableChain->Insert(newKey, 1);
+            I2 += tableChain->counter;
+
+            arr[del] = newKey;
+
+            // поиск существующего ключа
+            try {
+                tableOpen->Data(arr[rand() % k]);
+                S1 += tableOpen->counter;
+
+                tableChain->Data(arr[rand() % k]);
+                S2 += tableChain->counter;
+            }
+            catch (int& ex) {}
+        }
+
+        
+    }
+    cout << "Хеш-таблица с открытой адресацией:\n";
+    cout << "items count: " << tableOpen->getSize() << endl;
+    cout << "alpha: " << (double)tableOpen->getSize() / (double)tableOpen->getCapacity() << endl;
+    cout << "count insert: " << double(I1) / double(k) * 2.0 << endl;
+    cout << "count delete: " << double(D1) / double(k) * 2.0 << endl;
+    cout << "count search: " << double(S1) / double(k) * 2.0 << endl;
+    delete tableOpen;
+    cout << "Хеш-таблица с цепочками коллизий:\n";
+    cout << "items count: " << tableChain->getSize() << endl;
+    cout << "alpha: " << (double)tableChain->getSize() / (double)tableChain->getCapacity() << endl;
+    cout << "count insert: " << double(I2) / double(k) * 2.0 << endl;
+    cout << "count delete: " << double(D2) / double(k) * 2.0 << endl;
+    cout << "count search: " << double(S2) / double(k) * 2.0 << endl;
+    delete tableChain;
+
+    delete[] arr;
+}
+
+void testXI() {
+    srand(time(0));
+    int N, delta;
+    long long M;
+    cout << "Количество вставляемых элементов: ";
+    cin >> N;
+
+    //Выбираем размер из чисел Мерсене
+    int sizes[] = { 3, 7, 13, 31, 61, 127, 251, 509,
+                   1021, 2039, 4093, 8191, 16381, 32749, -1 };
+    delta = N - sizes[0];
+    long long res = 0;
+    while (sizes[res + 1] != -1 && abs(sizes[res + 1] - N) < delta) {
+        ++res;
+        delta = abs(sizes[res] - N);
+    }
+    M = sizes[res];
+    cout << "Размер массива: " << M << endl;
+
+    //Создаём массив счётчиков
+    int* counters = new int[M];
+    for (int i = 0; i < M; ++i)
+        counters[i] = 0;
+    //Тестирование
+    string val;
+    int key;
+    cout << SRand() << endl;
+    for (int i = 0; i < 20 * M; ++i) {
+        val = SRand();
+        res = 0;
+        for (int i = 0; i < val.length(); i++) {
+            res += val[val.length() - i] * pow(26, i);
+        }
+        double A = 0.6180339887;
+        long long h = M * fmodl(res * A, 1.0);
+        (counters[h])++;
+    }
+
+    //Рассчёт результата
+    double m1 = M - sqrt((double)M);
+    double m2 = M + sqrt((double)M);
+    double hi = 0;
+    for (int i = 0; i < M; ++i)
+        hi += (counters[i] - 20.0) * (counters[i] - 20.0);
+    hi /= 20.0;
+
+    cout << "Результаты [m - sqrt(m)] [XI] [m + sqrt(m)]:\n";
+    cout << '[' << m1 << "] [" << hi << "] [" << m2 << "]\n";
+    delete[] counters;
 }
 
 int main() {
@@ -36,9 +185,9 @@ int main() {
     TableChain<string, int>* tableChain = nullptr;
     //TableOpen<string, int>::Iterator iterOpen(*tableOpen);
     //TableChain<string, int>::Iterator iterChain(*tableOpen);
-    string mainMenu = "\n1 - Хеш-таблица с открытой адресацией\n2 - Хеш-таблица с цепочками коллизий\n3 - тестирование трудоемкости операций АТД\n4 - оценка хи-квадрат\n0 - выход";
+    string mainMenu = "1 - Хеш-таблица с открытой адресацией\n2 - Хеш-таблица с цепочками коллизий\n3 - тестирование трудоемкости операций АТД\n4 - оценка хи-квадрат\n0 - выход\n";
     string menuTables = "\n1 - опрос размера таблицы\n2 - опрос количества элементов в таблице\n3 - опрос пустоты таблицы\n4 - очистка таблицы\n5 - поиск элемента по ключу k\n6 - вставка элемента по ключу k\n7 - удаление элемента по ключу k\n8 - запрос прямого итератора begin()\n9 - запрос \"неустановленного\" прямого итератора end()\n10 - доступ по чтению к значению текущего элемента *\n11 - доступ по записи к текущему значению *\n12 - переход к следующему элементу в хеш-таблице\n13 - проверка равенства прямому итератору begin()\n14 - проверка равенства прямому итератору end()\n15 - вывод структуры хеш-таблицы на экран\n16 - опрос числа проб, выполненных последней операцией\n0 - выход в главное меню\n";
-    cout << mainMenu;
+    cout << "Главное меню:\n" << mainMenu;
     while (mainMode != 0) {
         cout << "> ";
         cin >> mainMode;
@@ -47,7 +196,7 @@ int main() {
             cout << "Введите размер хеш-таблицы: ";
             cin >> size;
             tableOpen = new TableOpen<string, int>(size);
-            cout << menuTables;
+            cout << "Меню таблиц:\n" << menuTables;
             while (tableMode != 0) {
                 cout << "> ";
                 cin >> tableMode;
@@ -142,7 +291,7 @@ int main() {
             cout << "Введите размер хеш-таблицы: ";
             cin >> size;
             tableChain = new TableChain<string, int>(size);
-            cout << menuTables;
+            cout << "Меню таблиц:\n" << menuTables;
             while (tableMode != 0) {
                 cout << "> ";
                 cin >> tableMode;
@@ -234,8 +383,10 @@ int main() {
             }
             break;
         case 3:
+            testTable();
             break;
         case 4:
+            testXI();
             break;
         case 0:
             return -1;

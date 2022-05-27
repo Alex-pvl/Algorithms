@@ -1,282 +1,111 @@
 ﻿#pragma once
 #include <iostream>
 #include <string>
-#include "BST.cpp"
-#include "RandTree.cpp"
+#include "TableOpen.h"
+#include "TableChain.h"
 #include <math.h>
 #include <time.h>
 using namespace std;
-typedef unsigned long long INT_64;
 
-//переменная и константы генератора LineRand()
-static INT_64 RRand = 15750;
-const const INT_64 mRand = (1 << 63) - 1;
-const const INT_64 aRand = 6364136223846793005;
-const const INT_64 cRand = 1442695040888963407;
-
-//функция установки первого случайного числа от часов
-//компьютера
-void sRand() {
-    srand(time(0));
-    RRand = (INT_64)rand();
+int randCahr() {
+    return (rand() % 26);
 }
 
-//функция генерации случайного числа
-//линейный конгруэнтный генератор Xi+1=(a*Xi+c)%m
-//habr.com/ru/post/208178
-INT_64 LineRand() {
-    INT_64 y1, y2;
-    y1 = (aRand * RRand + cRand) % mRand;
-    y2 = (aRand * y1 + cRand) % mRand;
-    RRand = y1 & 0xFFFFFFFF00000000LL ^ (y2 & 0xFFFFFFFF00000000LL) >> 32;
-    return RRand;
+string SRand() {
+    string str;
+    int lenght = (rand() % 6) + 5;
+    for (int i = 0; i < lenght; i++) {
+        char c = (90 - randCahr());
+        str += c;
+    }
+    return str;
 }
 
-//Тест трудоёмкости операций случайного BST-дерева
-void test_rand(int n) {
-    BST<INT_64, int> tree1;
-    RandTree<INT_64, int> tree2;
-    INT_64* m = new INT_64[n];
-    INT_64 key;
-    int ind;
-    sRand();
-    for (int i = 0; i < n; i++) {
-        m[i] = LineRand();
-        tree1.put(m[i], 1);
-        tree2.put(m[i], 1);
-    }
-    cout << "items count BST: " << tree1.getSize() << endl;
-    cout << "items count RND: " << tree2.getSize() << endl;
-    double I1 = 0, I2 = 0;
-    double D1 = 0, D2 = 0;
-    double S1 = 0, S2 = 0;
-    tree1.clearCount();
-    tree2.clearCount();
-    for (int i = 0; i < n / 2; i++) {
-        if (i % 10 == 0) {
-            key = LineRand();
-
-            tree1.clearCount();
-            tree1.remove(key);
-            D1+=tree1.countNodes();
-
-            tree2.clearCount();
-            tree2.remove(key);
-            D2+=tree2.countNodes();
-
-            ind = rand() % n;
-
-            tree1.clearCount();
-            tree1.put(m[ind], 1);
-            I1+=tree1.countNodes();
-
-            tree2.clearCount();
-            tree2.put(m[ind], 1);
-            I2 += tree2.countNodes();
-
-            key = LineRand();
-
-            try {
-                tree1.clearCount();
-                tree1.get(LineRand());
-                S1+=tree1.countNodes(); 
-            }
-            catch (const exception e) {
-                S1+=tree1.countNodes(); 
-            }
-            try {
-                tree2.clearCount();
-                tree2.get(LineRand());
-                S2 += tree2.countNodes();
-            }
-            catch (const exception e) {
-                S2 += tree2.countNodes();
-            }
-        }
-        else { // 90%
-            ind = rand() % n;
-
-            tree1.clearCount();
-            tree1.remove(m[ind]);
-            D1+=tree1.countNodes();
-
-            tree2.clearCount();
-            tree2.remove(m[ind]);
-            D2 += tree2.countNodes();
-
-            key = LineRand();
-
-            tree1.clearCount();
-            tree1.put(key, 1);
-            I1+=tree1.countNodes();
-
-            tree2.clearCount();
-            tree2.put(key, 1);
-            I2 += tree2.countNodes();
-
-            m[ind] = key;
-            ind = rand() % n;
-            try {
-                tree1.clearCount();
-                tree1.get(m[ind]);
-                S1+=tree1.countNodes();
-            }
-            catch (const exception e) {
-                S1+=tree1.countNodes(); 
-            }
-
-            try {
-                tree2.clearCount();
-                tree2.get(m[ind]);
-                S2 += tree2.countNodes();
-            }
-            catch (const exception e) {
-                S2 += tree2.countNodes();
-            }
-        }
-    }
-    //вывод результатов:
-    //вывод размера BST дерева после теста
-    cout << "items count BST: " << tree1.getSize() << endl;
-    //вывод размера Сбалансированного дерева после теста
-    cout << "items count RND: " << tree2.getSize() << endl;
-    //теоретической оценки трудоёмкости операций BST
-    cout << "1.39*log2(n)= " << 1.39 * (log((double)n) / log(2.0)) << endl;
-    //экспериментальной оценки трудоёмкости вставки BST-дерева
-    cout << "Count insert BST: " << I1 / (n / 2) << endl; 
-    //экспериментальной оценки трудоёмкости вставки Сбалансированного дерева
-    cout << "Count insert RND: " << I2 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости удаления BST-дерева
-    cout << "Count delete BST: " << D1 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости удаления Сбалансированного дерева
-    cout << "Count delete RND: " << D2 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости поиска BST-дерева
-    cout << "Count search BST: " << S1 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости поиска Сбалансированного дерева
-    cout << "Count search RND: " << S2 / (n / 2) << endl;
-
-    //освобождение памяти массива m[]
-    delete[] m;
-}
-
-// Тест трудоёмкости операций вырожденного BST - дерева
-void test_ord(int n) {
-    BST<INT_64, int> tree;
-    RandTree<INT_64, int> tree2;
-    INT_64* m = new INT_64[n];
-    for (int i = 0; i < n; i++) {
-        m[i] = i * 10000;
-        tree.put(m[i], 1);
-        tree2.put(m[i], 1);
-    }
-    cout << "items count BST: " << tree.getSize() << endl;
-    cout << "items count RND: " << tree2.getSize() << endl;
-    double I = 0, I2 = 0;
-    double D = 0, D2 = 0;
-    double S = 0, S2 = 0;
-    sRand();
-    tree.clearCount();
-    tree2.clearCount();
-    for (int i = 0; i < n / 2; i++) {
-        if (i % 10 == 0) {
-            int k = LineRand() % (10000 * n);
-            k = k + !(k % 2);
-
-            tree.clearCount();
-            tree.remove(k);
-            D += tree.countNodes();
-            tree2.clearCount();
-            tree2.remove(k);
-            D2 += tree2.countNodes();
-
-            int ind = rand() % n;
-
-            tree.clearCount();
-            tree.put(m[ind], 1);
-            I += tree.countNodes();
-            tree2.clearCount();
-            tree2.put(m[ind], 1);
-            I2 += tree2.countNodes();
-
-            k = LineRand() % (10000 * n);
-            k = k + !(k % 2);
-            try {
-                tree.clearCount();
-                tree.get(k);
-                S += tree.countNodes();
-            }
-            catch (const exception e) {
-                S += tree.countNodes();
-            }
-
-            try {
-                tree2.clearCount();
-                tree2.get(k);
-                S2 += tree2.countNodes();
-            }
-            catch (const exception e) {
-                S2 += tree2.countNodes();
-            }
-        }
-        else //90% успешных операций
-        {
-            int ind = rand() % n;
-            tree.clearCount();
-            tree.remove(m[ind]);
-            D += tree.countNodes();
-            tree2.clearCount();
-            tree2.remove(m[ind]);
-            D2 += tree2.countNodes();
-            int k = LineRand() % (10000 * n);
-            k = k + k % 2; // случайный чётный ключ
-            tree.clearCount();
-            tree.put(k, 1);
-            I += tree.countNodes();
-            tree2.clearCount();
-            tree2.put(k, 1);
-            I2 += tree2.countNodes();;
-            m[ind] = k;
-            ind = rand() % n;
-            try {
-                tree.clearCount();
-                tree.get(m[ind]);
-                S += tree.countNodes();;
-            }
-            catch (const exception e) {
-                S += tree.countNodes();
-            }
-            try {
-                tree2.clearCount();
-                tree2.get(m[ind]);
-                S2 += tree2.countNodes();;
-            }
-            catch (const exception e) {
-                S2 += tree2.countNodes();
-            }
-        }
-    }
-    //вывод результатов:
-    //вывод размера дерева после теста
-    cout << "items count: " << tree.getSize() << endl;
-    //теоретической оценки трудоёмкости операций BST
-    cout << "n/2 = " << n / 2 << endl;
-    //экспериментальной оценки трудоёмкости вставки BST-дерева
-    cout << "Count insert BST: " << I / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости вставки Сбалансированного дерева
-    cout << "Count insert RND: " << I2 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости удаления BST-дерева
-    cout << "Count delete BST: " << D / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости удаления Сбалансированного дерева
-    cout << "Count delete RND: " << D2 / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости поиска BST-дерева
-    cout << "Count search BST: " << S / (n / 2) << endl;
-    //экспериментальной оценки трудоёмкости поиска Сбалансированного дерева
-    cout << "Count search RND: " << S2 / (n / 2) << endl;
-    //освобождение памяти массива m[]
-    delete[] m;
+void testTable(bool form) {
+    int size;
+    cin >> size;
+    //HashTable<string, int>* table = new HashTable<string, int>(form, size);
 }
 
 int main() {
+    setlocale(LC_ALL, "ru");
+    int mainMode = -1, tableMode = -1, size = 0;
+    string key = "";
+    int data = 0;
+    TableOpen<string, int>* tableOpen = nullptr;
+    string mainMenu = "\n1 - Хеш-таблица с открытой адресацией\n2 - Хеш-таблица с цепочками коллизий\n3 - тестирование трудоемкости операций АТД\n4 - оценка хи-квадрат\n0 - выход";
+    string menuTables = "\n1 - опрос размера таблицы\n2 - опрос количества элементов в таблице\n3 - опрос пустоты таблицы\n4 - очистка таблицы\n5 - поиск элемента по ключу k\n6 - вставка элемента по ключу k\n7 - удаление элемента по ключу k\n8 - опрос формы представления\n9 - запрос прямого итератора begin()\n10 - запрос \"неустановленного\" прямого итератора end()\n11 - доступ по чтению к значению текущего элемента *\n12 - доступ по записи к текущему значению *\n13 - переход к следующему элементу в хеш-таблице\n14 - проверка равенства итераторов ==\n15 - проверка неравенства итераторов !=\n16 - вывод структуры хеш-таблицы на экран\n0 - выход в главное меню\n";
+    cout << mainMenu;
+    while (mainMode != 0) {
+        cout << "> ";
+        cin >> mainMode;
+        switch (mainMode) {
+        case 1:
+            cout << "Введите размер хеш-таблицы: ";
+            cin >> size;
+            tableOpen = new TableOpen<string, int>(size);
+            cout << menuTables;
+            while (tableMode != 0) {
+                cout << "> ";
+                cin >> tableMode;
+                switch (tableMode) {
+                case 1:
+                    cout << tableOpen->getCapacity() << endl;
+                    break;
+                case 2:
+                    cout << tableOpen->getSize() << endl;
+                    break;
+                case 3:
+                    cout << tableOpen->IsEmpty() << endl;
+                    break;
+                case 4:
+                    tableOpen->Clear();
+                    break;
+                case 5:
+                    cin >> key;
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                case 13:
+                    break;
+                case 14:
+                    break;
+                case 15:
+                    break;
+                case 16:
+                    break;
+                case 0:
+                    break;
+                default:
+                    break;
+                }
+            }
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 0:
+            return -1;
+        }
+    }
+}
+
+/*int main() {
     setlocale(LC_ALL, "ru");
     int mode = -1;
     RandTree<int, int> rt;
@@ -448,16 +277,11 @@ int main() {
         case 27:
             cin >> n;
             test_rand(n);
-            /*for (int i = 200; i <= 2000; i += 200) {
-                test_rand(i);
-            }*/
             break;
         case 28:
             cin >> n;
             test_ord(n);
-            /*for (int i = 200; i <= 2000; i += 200) {
-                test_ord(i);
-            }*/
+
             break;
         case 29:
             cout << "Доступные команды:" << menu << endl;
@@ -471,6 +295,6 @@ int main() {
             break;
         }
     }
-    
+
     return 0;
-}
+}*/

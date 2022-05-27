@@ -19,7 +19,7 @@ protected:
 	Node** Table;
 public:
 	TableChain(unsigned int size) {
-		TableForm<K, D>::Capacity = pow(2., (int)log(size / 2.) / log(2.));
+		TableForm<K, D>::Capacity = pow(2., (int)log(size * 2.) / log(2.));
 		Table = new Node * [TableForm<K, D>::Capacity];
 		for (unsigned int i = 0; i < TableForm<K, D>::Capacity; i++) {
 			Table[i] = nullptr;
@@ -50,8 +50,8 @@ public:
 	}
 
 	bool Delete(K key) {
-		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key);
-		Node* node = this->Table[index];
+		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
+		Node * node = this->Table[index];
 		if (node->key == key) {
 			Table[index] = node->next;
 			delete node;
@@ -69,11 +69,10 @@ public:
 				return true;
 			}
 		}
-		return false;
 	}
 
 	bool Insert(K key, D data) {
-		Node* node = this->Table[TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key)];
+		Node* node = this->Table[TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key))];
 		if (node == nullptr) {
 			node = new Node(key, data);
 			this->counter++;
@@ -94,7 +93,7 @@ public:
 	}
 
 	void Print() {
-		for (int i = 0; i < capacity; ++i) {
+		for (int i = 0; i < this->Capacity; ++i) {
 			cout << i << ". ";
 			Node* ptr = Table[i];
 			while (ptr != 0) {

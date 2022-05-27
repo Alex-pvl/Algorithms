@@ -1,41 +1,33 @@
 ﻿  BST.cpp
-  HashTable.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\HashTable.h(47,1): error C2955: "ItForm": для использования класс шаблон требуется список аргументов шаблон
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(4): message : см. объявление "ItForm"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\HashTable.h(65): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "HashTable<K,D>::Iterator"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\HashTable.h(69): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "HashTable<K,D>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\HashTable.h(13,34): error C2760: синтаксическая ошибка: непредвиденный токен ")"; требуется "выражение"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\HashTable.h(34,30): error C2760: синтаксическая ошибка: непредвиденный токен "идентификатор"; требуется ")"
-  ItChain.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,12): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(12): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "ItForm<K,D>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,1): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,16): error C2238: непредвиденные лексемы перед ";"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(7,9): error C2061: синтаксическая ошибка: идентификатор "TableForm"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItChain.h(5,1): error C2955: "ItForm": для использования класс шаблон требуется список аргументов шаблон
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(4): message : см. объявление "ItForm"
-  ItForm.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,12): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(12): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "ItForm<K,D>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,1): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,16): error C2238: непредвиденные лексемы перед ";"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(7,9): error C2061: синтаксическая ошибка: идентификатор "TableForm"
-  ItOpen.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,12): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(12): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "ItForm<K,D>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,1): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(6,16): error C2238: непредвиденные лексемы перед ";"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(7,9): error C2061: синтаксическая ошибка: идентификатор "TableForm"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItOpen.h(5,1): error C2955: "ItForm": для использования класс шаблон требуется список аргументов шаблон
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\ItForm.h(4): message : см. объявление "ItForm"
   Laba-1.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(13,7): warning C4114: Множественное использование одного и того же квалификатора типа.
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(13,36): warning C4293: <<: отрицательное или слишком большое смещение; поведение не определено
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(14,7): warning C4114: Множественное использование одного и того же квалификатора типа.
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(15,7): warning C4114: Множественное использование одного и того же квалификатора типа.
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(20,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(97,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(96): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Print(void)"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(46): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableOpen<std::string,int>"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(46,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(45): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Clear(void)"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(62): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableOpen<std::string,int>::Clear(void)"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(26,34): warning C4244: =: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(24): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::TableOpen(unsigned int)"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(46): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::TableOpen(unsigned int)"
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableForm.h(32,1): warning C4244: +=: преобразование "double" в "unsigned __int64", возможна потеря данных
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableForm.h(25): message : во время компиляции функции-члена класс шаблон "unsigned __int64 TableForm<K,D>::toUnsign(K)"
+          with
+          [
+              K=std::string,
+              D=int
+          ]
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(112): message : выполняется компиляция ссылки на экземпляр шаблон функции "unsigned __int64 TableForm<K,D>::toUnsign(K)"
+          with
+          [
+              K=std::string,
+              D=int
+          ]
+C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(7): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableForm<K,D>"
+          with
+          [
+              K=std::string,
+              D=int
+          ]
   RandTree.cpp
-  TableChain.cpp
-  TableForm.cpp
-  TableOpen.cpp
   Создание кода...
+  Laba-1.vcxproj -> C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe

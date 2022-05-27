@@ -12,6 +12,7 @@ protected:
 		K key;
 		D data;
 		char state;
+		Node() {}
 		Node(K newkey, D newdata)
 		{
 			key = newkey;
@@ -29,61 +30,64 @@ public:
 	D& Data(K key)
 	{
 		int i = 0;
+		unsigned int index;
 		do {
-			unsigned int index = h(key, i);
-			if (this->Table[index]->state == 'b' && this->Table[index]->key == key) {
-				return this->Table[index]->data;
+			index = h(key, i);
+			if (this->Table[index].state == 'b' && this->Table[index].key == key) {
+				return this->Table[index].data;
 			}
 			this->counter++;
 			i++;
-		} while (i != this->Capacity && this->Table[index]->state != 'f');
+		} while (i != this->Capacity && this->Table[index].state != 'f');
 		throw (-1);
 	}
 
 	void Clear() {
-		for (int i = 0; i < capacity; i++) {
-			this->Table[i]->state = 'f';
+		for (int i = 0; i < this->Capacity; i++) {
+			this->Table[i].state = 'f';
 		}
 		this->Size = 0;
 	}
 
 	bool Delete(K key) {
 		int i = 0;
+		unsigned int index;
 		do {
-			unsigned int index = h(key, i);
-			if (this->Table[index]->state == 'b' && this->Table[index]->key == key) {
-				Table[pos]->state = 'd';
+			index = h(key, i);
+			if (this->Table[index].state == 'b' && this->Table[index].key == key) {
+				Table[index].state = 'd';
 				this->Size--;
 				return true;
 			}
 			this->counter++;
 			i++;
-		} while (i != this->Capacity && this->Table[index]->state != 'f');
+		} while (i != this->Capacity && this->Table[index].state != 'f');
 		return false;
 	}
 
 	bool Insert(K key, D data) {
 		int i = 0, pos = -1;
+		unsigned int index;
 		do {
-			unsigned int index = h(key, i);
-			if (this->Table[index]->state == 'd' && pos == -1) {
+			index = h(key, i);
+			if (this->Table[index].state == 'd' && pos == -1) {
 				pos = index;
 			}
-			if (this->Table[index]->state == 'b' && this->Table[index]->key == key) {
+			if (this->Table[index].state == 'b' && this->Table[index].key == key) {
 				return false;
 			}
 			this->counter++;
 			i++;
-		} while (i != this->Capacity && this->Table[index]->state != 'f');
+		} while (i != this->Capacity && this->Table[index].state != 'f');
 		if (i == this->Capacity && pos == -1) {
 			return false;
 		}
 		if (pos == -1) {
 			pos = i;
 		}
-		Table[pos]->key = key;
-		Table[pos]->data = data;
-		Table[pos]->state = 'b';
+		Table[pos].key = key;
+		Table[pos].data = data;
+		Table[pos].state = 'b';
 		this->Size++;
 		return true;
 
@@ -92,19 +96,19 @@ public:
 	void Print() {
 		for (int i = 0; i < this->Capacity; i++) {
 			cout << i << ": ";
-			if (this->Table[i]->state == 'f') {
+			if (this->Table[i].state == 'f') {
 				cout << "FREE\n";
 			}
-			if (this->Table[i]->state == 'd') {
+			if (this->Table[i].state == 'd') {
 				cout << "DELETED\n";
 			}
-			if (this->Table[i]->state == 'b') {
-				cout << "BUSY " << this->Table[i]->key << " " << this->Table[i]->data << endl;
+			if (this->Table[i].state == 'b') {
+				cout << "BUSY " << this->Table[i].key << " " << this->Table[i].data << endl;
 			}
 		}
 	}
 
-	unsigned int h(unsigned long long key, int i) {
+	unsigned int h(K key, int i) {
 		return (TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key)) + i) % this->Capacity;
 	}
 
@@ -115,7 +119,7 @@ public:
 			this->index = 0;
 			this->end = false;
 			for (; this->table[this->index].state != 'b'; this->index++) {
-				if (i >= table.Capacity) {
+				if (this->index >= table.Capacity) {
 					this->end = true;
 					this->index = -1;
 				}
@@ -134,7 +138,7 @@ public:
 				throw (-1);
 			}
 			for (; this->table[this->index].state != 'b'; this->index++) {
-				if (i >= table.Capacity) {
+				if (this->index >= table.Capacity) {
 					this->end = true;
 					this->index = -1;
 					return *this;

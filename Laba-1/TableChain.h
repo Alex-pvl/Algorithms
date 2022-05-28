@@ -18,8 +18,9 @@ protected:
 	};
 	Node** Table;
 public:
+	TableChain() {}
 	TableChain(unsigned int size) {
-		TableForm<K, D>::Capacity = pow(2., (int)log(size * 2.) / log(2.));
+		TableForm<K, D>::Capacity = pow(2., (int)log(size / 2.) / log(2.));
 		Table = new Node * [TableForm<K, D>::Capacity];
 		for (unsigned int i = 0; i < TableForm<K, D>::Capacity; i++) {
 			Table[i] = nullptr;
@@ -27,7 +28,7 @@ public:
 	}
 
 	D& Data(K key) {
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
 		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
 		Node* curr = this->Table[index];
@@ -54,40 +55,45 @@ public:
 	}
 
 	bool Delete(K key) {
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
 		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
 		Node * node = this->Table[index];
-		if (node->key == key) {
-			Table[index] = node->next;
-			delete node;
-			this->Size--;
-			this->counter++;
-			return true;
-		}
+		Node* prev = nullptr;
 		while (node != nullptr) {
 			this->Probes++;
 			this->counter++;
-			if (node->next->key == key) {
-				Node* tmp = node->next;
-				node->next = tmp->next;
-				delete tmp;
-				this->Size--;
-				return true;
+			if (node->key == key) {
+				break;
 			}
+			prev = node;
+			node = node->next;
 		}
+		if (node == nullptr) {
+			return false;
+		}
+		if (Table[index] == node) {
+			Table[index] = node->next;
+			delete node;
+			this->Size--;
+			return true;
+		}
+		prev->next = node->next;
+		delete node;
+		this->Size--;
+
+		return true;
 	}
 
 	bool Insert(K key, D data) {
-		if (this->Size >= this->Capacity * 0.75) {
-			this->Expand();
-		}
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
-		Node* node = this->Table[TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key))];
+		unsigned int hash = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
+		Node* node = this->Table[hash];
 		if (node == nullptr) {
 			node = new Node(key, data);
-			this->Table[TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key))] = node;
+			node->next = nullptr;
+			this->Table[hash] = node;
 			this->counter++;
 			this->Size++;
 			return true;
@@ -102,6 +108,7 @@ public:
 		}
 		this->counter++;
 		Node* tmp = new Node(key, data);
+		tmp->next = nullptr;
 		node->next = tmp;
 		this->Size++;
 		return true;
@@ -119,34 +126,20 @@ public:
 		}
 	}
 
-	void Expand() {
-		Node** tmp = new Node * [this->Capacity];
-		for (int i = 0; i < this->Capacity; i++) {
-			tmp[i] = this->Table[i];
-		}
-		delete this->Table;
-		unsigned int oldCap = this->Capacity;
-		this->Capacity = pow(2., (int)log(this->Size * 2.) / log(2.));
-		this->Table = new Node * [this->Capacity];
-		for (int i = 0; i < oldCap; i++) {
-			this->Table[i] = tmp[i];
-		}
-		delete tmp;
-	}
-
 	class Iterator {
 	public:
-		Iterator(TableChain& table) {
+		Iterator(TableChain<K, D>& table) {
 			this->table = table;
 			this->index = 0;
-			for (; this->table[this->index] == nullptr; this->index++) {
+			for (; this->table.Table[this->index] == nullptr; this->index++) {
 				if (this->index >= this->table.Capacity) {
 					this->index = -1;
 					this->node = nullptr;
+					break;
 				}
 			}
 			if (this->index != -1) {
-				this->node = this->table[this->index];
+				this->node = this->table.Table[this->index];
 			}
 		}
 
@@ -165,7 +158,7 @@ public:
 				this->node = this->node->next;
 				return *this;
 			}
-			for (; this->table[this->index] == nullptr; this->index++) {
+			for (; this->table.Table[++this->index] == nullptr;) {
 				if (this->index >= this->table.Capacity) {
 					this->index = -1;
 					this->node = nullptr;
@@ -173,7 +166,7 @@ public:
 				}
 			}
 			if (this->index != -1) {
-				this->node = this->table[this->index];
+				this->node = this->table.Table[this->index];
 			}
 			return *this;
 		}
@@ -184,8 +177,9 @@ public:
 		bool operator!=(const Iterator& iter) {
 			return (this->node != iter.node);
 		}
-	private:
 		int index;
+	private:
+		
 		TableChain table;
 		Node* node;
 	};
@@ -198,5 +192,6 @@ public:
 	Iterator end() {
 		Iterator end(*this);
 		end.index = -1;
+		return end;
 	}
 };

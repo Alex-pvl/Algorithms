@@ -22,13 +22,14 @@ protected:
 	};
 	Node* Table;
 public:
+	TableOpen() {}
 	TableOpen(unsigned int size) {
 		TableForm<K, D>::Capacity = pow(2., (int)(log(size * 2.) / log(2.)));
 		Table = new Node[TableForm<K, D>::Capacity];
 	}
 
 	D& Data(K key) {
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
 		int i = 0;
 		unsigned int index;
@@ -52,7 +53,7 @@ public:
 	}
 
 	bool Delete(K key) {
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
 		int i = 0;
 		unsigned int index;
@@ -71,10 +72,7 @@ public:
 	}
 
 	bool Insert(K key, D data) {
-		if (this->Size >= this->Capacity * 0.75) {
-			this->Expand();
-		}
-		this->counter = 0;
+		this->counter = 1;
 		this->Probes = 0;
 		int i = 0, pos = -1;
 		unsigned int index;
@@ -123,33 +121,15 @@ public:
 		return (TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key)) + i) % this->Capacity;
 	}
 
-	void Expand() {
-		Node* tmp = new Node[this->Capacity];
-		for (int i = 0; i < this->Capacity; i++) {
-			tmp[i].state = this->Table[i].state;
-			tmp[i].key = this->Table[i].key;
-			tmp[i].data = this->Table[i].data;
-		}
-		delete this->Table;
-		unsigned int oldCap = this->Capacity;
-		this->Capacity = pow(2., (int)log(this->Size * 2.) / log(2.));
-		this->Table = new Node[this->Capacity];
-		for (int i = 0; i < oldCap; i++) {
-			this->Table[i].state = tmp[i].state;
-			this->Table[i].key = tmp[i].key;
-			this->Table[i].data = tmp[i].data;
-		}
-		delete tmp;
-	}
-
 	class Iterator {
 	public:
 		Iterator(TableOpen& table) {
 			this->table = table;
 			this->index = 0;
-			for (; this->table[this->index].state != 'b'; this->index++) {
+			for (; this->table.Table[this->index].state != 'b'; this->index++) {
 				if (this->index >= table.Capacity) {
 					this->index = -1;
+					break;
 				}
 			}
 		}
@@ -158,14 +138,14 @@ public:
 			if (this->index == -1) {
 				throw(-1);
 			}
-			return this->table[this->index]->data;
+			return this->table.Table[this->index].data;
 		}
 
 		Iterator operator ++() {
 			if (this->index == -1) {
 				throw (-1);
 			}
-			for (; this->table[this->index].state != 'b'; this->index++) {
+			for (; this->table.Table[++this->index].state != 'b';) {
 				if (this->index >= table.Capacity) {
 					this->index = -1;
 					return *this;
@@ -180,8 +160,8 @@ public:
 		bool operator!=(const Iterator& iter) {
 			return (this->index != iter.index);
 		}
-	private:
 		int index;
+	private:
 		TableOpen table;
 	};
 
@@ -193,6 +173,7 @@ public:
 	Iterator end() {
 		Iterator end(*this);
 		end.index = -1;
+		return end;
 	}
 };
 

@@ -14,16 +14,20 @@ public:
 	double A;
 	TableForm() { 
 		Size = Probes = 0;
-		A = (sqrt(5.) - 1.0) / 2.0; 
+		A = 0.6180339887;
+	}
+	int getCounter() {
+		int k = this->counter;
+		this->counter = 0;
+		return k;
 	}
 	unsigned int Hash(unsigned long long key) { 
-		return (unsigned int) (Capacity * (A * key - int(A * key))); 
+		return (unsigned int) (Capacity * fmodl(key * A, 1.));
 	}
 	unsigned long long toUnsign(K key) { 
-		string k = key;
 		unsigned long long res = 0;
-		for (int i = 0; i < k.length(); i++) {
-			res += k[k.length() - i - 1] * pow(26, i);
+		for (int i = 0; i < key.length(); i++) {
+			res += key[key.length() - i - 1] * pow(26, i);
 		}
 		return res; 
 	}

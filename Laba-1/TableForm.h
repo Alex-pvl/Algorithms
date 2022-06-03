@@ -15,6 +15,7 @@ public:
 	TableForm() { 
 		Size = Probes = 0;
 		A = 0.6180339887;
+		this->Capacity = 8;
 	}
 	int getCounter() {
 		int k = this->counter;
@@ -26,8 +27,12 @@ public:
 	}
 	unsigned long long toUnsign(K key) { 
 		unsigned long long res = 0;
-		for (int i = 0; i < key.length(); i++) {
-			res += key[key.length() - i - 1] * pow(26, i);
+		char k = key[0];
+		res += (int)k - 'A' + 1;
+		for (int i = 1; i < key[i] != '\0'; i++) {
+			k = key[i];
+			res *= 26;
+			res += (int)k - 'A' + 1;
 		}
 		return res; 
 	}

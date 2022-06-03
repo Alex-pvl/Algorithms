@@ -13,7 +13,7 @@ int randChar() {
 
 string SRand() {
     string str;
-    int line = rand() % 5 + 4;
+    int line = rand() % 5 + 5;
     for (int i = 0; i < line; i++) {
         char B = (90 - randChar());
         str += B;
@@ -144,46 +144,58 @@ void testTableChain() {
 
 
 void testXI() {
+    cout << "Качество хэш-функции по критерию хи-квадрат\n";
     srand(time(0));
+
     //Опрос параметров тестирования
     int N, delta;
     long long M;
     cout << "Количество вставляемых элементов: ";
     cin >> N;
+
     //Выбираем размер из чисел Мерсене
     int sizes[] = { 4, 8, 16, 32, 64, 128, 256, 512,
                    1024, 2048, 4096, 8192, 16384, 32768, -1 };
     delta = N - sizes[0];
-    unsigned long long index = 0;
+    long long index = 0;
     while (sizes[index + 1] != -1 && abs(sizes[index + 1] - N) < delta) {
         ++index;
         delta = abs(sizes[index] - N);
     }
     M = sizes[index];
     cout << "Размер массива: " << M << endl;
+
     //Создаём массив счётчиков
     int* counter = new int[M];
-    for (int i = 0; i < M; i++)
+    for (int i = 0; i < M; ++i)
         counter[i] = 0;
+
     //Тестирование
     string val;
-    for (int i = 0; i < 20 * M; i++) {
+    int key;
+    for (int i = 0; i < 20 * M; ++i) {
         val = SRand();
-        unsigned long long res = 0;
-        for (int i = 0; i < val.length(); i++) {
-            res += val[val.length() - i - 1] * pow(26, i);
+        index = 0;
+        char k = val[0];
+        index += (int)k - 64;
+        for (int i = 1; val[i] != '\0'; i++) {
+            k = val[i];
+            index *= 26;
+            index += (int)k - 64;
         }
         double A = 0.6180339887;
-        int h = (int)(M * fmodl(A * res, 1.));
+        long long h = M * fmodl(index * A, 1.0);
         (counter[h])++;
     }
+
     //Рассчёт результата
     double m1 = M - sqrt((double)M);
     double m2 = M + sqrt((double)M);
     double hi = 0;
-    for (int i = 0; i < M; i++)
+    for (int i = 0; i < M; ++i)
         hi += (counter[i] - 20.0) * (counter[i] - 20.0);
     hi /= 20.0;
+
     cout << "Результаты [m - sqrt(m)] [XI] [m + sqrt(m)]:\n";
     cout << '[' << m1 << "] [" << hi << "] [" << m2 << "]\n";
     delete[] counter;
@@ -191,7 +203,7 @@ void testXI() {
 
 int main() {
     setlocale(LC_ALL, "ru");
-    int mainMode = -1, tableMode = -1, size = 0;
+    int mainMode = -1, tableMode1 = -1, tableMode2 = -1, size = 0;
     string key = "";
     int data = 0;
     TableOpen<string, int>* tableOpen = nullptr;
@@ -211,10 +223,10 @@ int main() {
             tableOpen = new TableOpen<string, int>(size);
             cout << "Меню таблиц:\n" << menuTables;
             iterOpen = new TableOpen<string, int>::Iterator(*tableOpen);
-            while (tableMode != 0) {
+            while (tableMode1 != 0) {
                 cout << "> ";
-                cin >> tableMode;
-                switch (tableMode) {
+                cin >> tableMode1;
+                switch (tableMode1) {
                 case 1:
                     cout << tableOpen->getCapacity() << endl;
                     break;
@@ -295,6 +307,7 @@ int main() {
                 case 16:
                     cout << tableOpen->NumOfProbes();
                 case 0:
+                    cout << mainMenu << endl;
                     break;
                 default:
                     break;
@@ -306,11 +319,11 @@ int main() {
             cin >> size;
             tableChain = new TableChain<string, int>(size);
             cout << "Меню таблиц:\n" << menuTables;
-            iterChain= new TableChain<string, int>::Iterator(*tableChain);
-            while (tableMode != 0) {
+            iterChain = new TableChain<string, int>::Iterator(*tableChain);
+            while (tableMode2 != 0) {
                 cout << "> ";
-                cin >> tableMode;
-                switch (tableMode) {
+                cin >> tableMode2;
+                switch (tableMode2) {
                 case 1:
                     cout << tableChain->getCapacity() << endl;
                     break;
@@ -356,7 +369,7 @@ int main() {
                     }
                     catch (...)
                     {
-                        cerr << "Исключение\n";
+                        cout << "Исключение\n";
                     }
                     break;
                 case 11:
@@ -372,7 +385,7 @@ int main() {
                 case 12:
                     try
                     {
-                        iterChain++;
+                        ++(*iterChain);
                     }
                     catch (...)
                     {
@@ -390,7 +403,9 @@ int main() {
                     break;
                 case 16:
                     cout << tableChain->NumOfProbes();
+                    break;
                 case 0:
+                    cout << mainMenu << endl;
                     break;
                 default:
                     break;

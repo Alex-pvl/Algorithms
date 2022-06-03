@@ -18,9 +18,11 @@ protected:
 	};
 	Node** Table;
 public:
-	TableChain() {}
+	TableChain() {
+		this->Capacity = 8;
+	}
 	TableChain(unsigned int size) {
-		TableForm<K, D>::Capacity = pow(2., (int)log(size / 2.) / log(2.));
+		TableForm<K, D>::Capacity = pow(2., (int)(log(size / 2.) / log(2.)));
 		Table = new Node * [TableForm<K, D>::Capacity];
 		for (unsigned int i = 0; i < TableForm<K, D>::Capacity; i++) {
 			Table[i] = nullptr;
@@ -33,23 +35,25 @@ public:
 		unsigned int index = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
 		Node* curr = this->Table[index];
 		while (curr != nullptr) {
-			this->counter++;
 			this->Probes++;
 			if (curr->key == key)
 				return curr->data;
 			curr = curr->next;
+			this->counter++;
 		}
-		throw (-1);
+		throw 1;
 	}
 
 	void Clear() {
+		Node* ptr, * ptrNext;
 		for (int i = 0; i < this->Capacity; i++) {
-			Node* node = Table[i];
-			while (node != nullptr) {
-				Node* tmp = node;
-				node = node->next;
-				delete tmp;
+			ptr = this->Table[i];
+			while (ptr != nullptr) {
+				ptrNext = ptr->next;
+				delete ptr;
+				ptr = ptrNext;
 			}
+			this->Table[i] = 0;
 		}
 		this->Size = 0;
 	}
@@ -90,34 +94,27 @@ public:
 		this->Probes = 0;
 		unsigned int hash = TableForm<K, D>::Hash(TableForm<K, D>::toUnsign(key));
 		Node* node = this->Table[hash];
-		if (node == nullptr) {
-			node = new Node(key, data);
-			node->next = nullptr;
-			this->Table[hash] = node;
-			this->counter++;
-			this->Size++;
-			return true;
-		}
-		while (node->next != nullptr) {
-			this->Probes++;
-			this->counter++;
+		while (node != nullptr) {
 			if (node->key == key) {
-				return false;
+				return 0;
 			}
 			node = node->next;
+			++this->counter;
+			++this->Probes;
 		}
-		this->counter++;
-		Node* tmp = new Node(key, data);
-		tmp->next = nullptr;
-		node->next = tmp;
+		node = new Node(key, data);
+		node->next = nullptr;
+		node->next = Table[hash];
+		Table[hash] = node;
 		this->Size++;
 		return true;
 	}
 
 	void Print() {
+		Node* ptr;
 		for (int i = 0; i < this->Capacity; i++) {
 			cout << i << ": ";
-			Node* ptr = Table[i];
+			ptr = Table[i];
 			while (ptr != nullptr) {
 				cout << ptr->key << ':' << ptr->data << '\t';
 				ptr = ptr->next;
@@ -132,7 +129,7 @@ public:
 			this->table = table;
 			this->index = 0;
 			for (; this->table.Table[this->index] == nullptr; this->index++) {
-				if (this->index >= this->table.Capacity) {
+				if (this->index >= this->table.getCapacity()) {
 					this->index = -1;
 					this->node = nullptr;
 					break;
@@ -145,7 +142,7 @@ public:
 
 		D& operator *() {
 			if (this->index == -1) {
-				throw(-1);
+				throw 1;
 			}
 			return this->node->data;
 		}
@@ -169,7 +166,28 @@ public:
 				this->node = this->table.Table[this->index];
 			}
 			return *this;
+			/*if (this->index == -1) {
+				throw new exception("Исключение\n"); new exception("Исключение");
+			}
+			if (this->node->next != nullptr) {
+				this->node = this->node->next;
+				return *this;
+			}
+			this->index++;
+			while (this->table.Table[this->index] == nullptr) {
+				if (this->index == this->table.getCapacity()) {
+					this->index = -1;
+					this->node = nullptr;
+					break;
+				}
+				this->index++;
+			}
+			if (this->index != -1) {
+				this->node = this->table.Table[this->index];
+			}
+			return *this;*/
 		}
+
 
 		bool operator==(const Iterator& iter) {
 			return (this->node == iter.node);
@@ -177,11 +195,12 @@ public:
 		bool operator!=(const Iterator& iter) {
 			return (this->node != iter.node);
 		}
+
 		int index;
-	private:
-		
-		TableChain table;
 		Node* node;
+	private:
+		TableChain table;
+		
 	};
 
 	Iterator begin() {
@@ -192,6 +211,7 @@ public:
 	Iterator end() {
 		Iterator end(*this);
 		end.index = -1;
+		end.node = nullptr;
 		return end;
 	}
 };

@@ -1,51 +1,50 @@
-﻿  BST.cpp
-  Laba-1.cpp
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(25,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(33,35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(54,25): warning C4101: ex: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(71,25): warning C4101: ex: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(85,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(93,36): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(114,25): warning C4101: ex: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(131,25): warning C4101: ex: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(148,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(187,21): warning C4244: инициализация: преобразование "long double" в "__int64", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(175,9): warning C4101: key: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(273,33): warning C4101: a: неиспользованная локальная переменная
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(159,21): warning C4018: >=: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(150): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::Iterator TableChain<std::string,int>::Iterator::operator ++(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(389): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::Iterator TableChain<std::string,int>::Iterator::operator ++(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(322): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableChain<std::string,int>::Iterator"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(132,21): warning C4018: >=: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(128): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::Iterator::Iterator(TableChain<std::string,int> &)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(322): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::Iterator::Iterator(TableChain<std::string,int> &)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(149,21): warning C4018: >=: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(144): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::Iterator TableOpen<std::string,int>::Iterator::operator ++(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(291): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::Iterator TableOpen<std::string,int>::Iterator::operator ++(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(225): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableOpen<std::string,int>::Iterator"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(130,21): warning C4018: >=: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(126): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::Iterator::Iterator(TableOpen<std::string,int> &)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(225): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::Iterator::Iterator(TableOpen<std::string,int> &)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(115,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(113): message : во время компиляции функции-члена класс шаблон "void TableChain<std::string,int>::Print(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(403): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableChain<std::string,int>::Print(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(92): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableChain<std::string,int>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(49,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(47): message : во время компиляции функции-члена класс шаблон "void TableChain<std::string,int>::Clear(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(338): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableChain<std::string,int>::Clear(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(25,34): warning C4244: =: преобразование "double" в "unsigned int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableChain.h(24): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::TableChain(unsigned int)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(92): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::TableChain(unsigned int)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(106,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(105): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Print(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(305): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableOpen<std::string,int>::Print(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(32): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableOpen<std::string,int>"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(49,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(48): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Clear(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(240): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableOpen<std::string,int>::Clear(void)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(27,34): warning C4244: =: преобразование "double" в "unsigned int", возможна потеря данных
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\TableOpen.h(26): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::TableOpen(unsigned int)"
-C:\Users\Александр\C++\Laba-1\Laba-1\Laba-1\Laba-1.cpp(32): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::TableOpen(unsigned int)"
-  RandTree.cpp
-  Создание кода...
-  Laba-1.vcxproj -> C:\Users\Александр\C++\Laba-1\Laba-1\x64\Debug\Laba-1.exe
+﻿  Laba-1.cpp
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(25,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(33,35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(54,25): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(71,25): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(85,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(93,36): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(114,25): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(131,25): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(148,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(187,21): warning C4244: инициализация: преобразование "long double" в "__int64", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(175,9): warning C4101: key: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(273,33): warning C4101: a: неиспользованная локальная переменная
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(161,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(152): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::Iterator TableChain<std::string,int>::Iterator::operator ++(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(388): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::Iterator TableChain<std::string,int>::Iterator::operator ++(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(322): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableChain<std::string,int>::Iterator"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(167,20): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(130,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(128): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::Iterator::Iterator(TableChain<std::string,int> &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(322): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::Iterator::Iterator(TableChain<std::string,int> &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(136,20): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(149,21): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(144): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::Iterator TableOpen<std::string,int>::Iterator::operator ++(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(291): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::Iterator TableOpen<std::string,int>::Iterator::operator ++(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(225): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableOpen<std::string,int>::Iterator"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(130,21): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(126): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::Iterator::Iterator(TableOpen<std::string,int> &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(225): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::Iterator::Iterator(TableOpen<std::string,int> &)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(115,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(113): message : во время компиляции функции-члена класс шаблон "void TableChain<std::string,int>::Print(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(402): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableChain<std::string,int>::Print(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(92): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableChain<std::string,int>"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(49,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(47): message : во время компиляции функции-члена класс шаблон "void TableChain<std::string,int>::Clear(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(337): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableChain<std::string,int>::Clear(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(25,34): warning C4244: =: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableChain.h(24): message : во время компиляции функции-члена класс шаблон "TableChain<std::string,int>::TableChain(unsigned int)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(92): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableChain<std::string,int>::TableChain(unsigned int)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(106,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(105): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Print(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(305): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableOpen<std::string,int>::Print(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(32): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TableOpen<std::string,int>"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(49,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(48): message : во время компиляции функции-члена класс шаблон "void TableOpen<std::string,int>::Clear(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(240): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TableOpen<std::string,int>::Clear(void)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(27,34): warning C4244: =: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\TableOpen.h(26): message : во время компиляции функции-члена класс шаблон "TableOpen<std::string,int>::TableOpen(unsigned int)"
+C:\Users\kiril\source\repos\Alex-pvl\Algorithms\Laba-1\Laba-1.cpp(32): message : выполняется компиляция ссылки на экземпляр шаблон функции "TableOpen<std::string,int>::TableOpen(unsigned int)"
+  Laba-1.vcxproj -> C:\Users\kiril\source\repos\Alex-pvl\Algorithms\x64\Debug\Laba-1.exe

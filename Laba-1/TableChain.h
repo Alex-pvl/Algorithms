@@ -127,15 +127,17 @@ public:
 	public:
 		Iterator(TableChain<K, D>& table) {
 			this->table = table;
-			this->index = 0;
-			for (; this->table.Table[this->index] == nullptr; this->index++) {
-				if (this->index >= this->table.getCapacity()) {
-					this->index = -1;
-					this->node = nullptr;
+			while (this->index < this->table.Capacity) {
+				if (this->table.Table[this->index] != nullptr) {
 					break;
 				}
+				this->index++;
 			}
-			if (this->index != -1) {
+			if (this->index >= this->table.Capacity) {
+				this->index = -1;
+				this->node = nullptr;
+			}
+			else {
 				this->node = this->table.Table[this->index];
 			}
 		}
@@ -155,14 +157,19 @@ public:
 				this->node = this->node->next;
 				return *this;
 			}
-			for (; this->table.Table[++this->index] == nullptr;) {
-				if (this->index >= this->table.Capacity) {
-					this->index = -1;
-					this->node = nullptr;
-					return *this;
+			this->index++;
+			while (this->index < this->table.Capacity) {
+				if (this->table.Table[this->index] != nullptr) {
+					break;
 				}
+				this->index++;
 			}
-			if (this->index != -1) {
+			if (this->index >= this->table.Capacity) {
+				this->index = -1;
+				this->node = nullptr;
+				return *this;
+			}
+			else {
 				this->node = this->table.Table[this->index];
 			}
 			return *this;
